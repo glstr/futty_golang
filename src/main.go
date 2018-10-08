@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"howuse"
+	"time"
+)
 
 func main() {
-    fmt.Printf("hello world")
+	t := time.Now()
+	howuse.MapMakeUse()
+	fmt.Printf("cost:%v ms\n", time.Since(t).Nanoseconds()/1000000.0)
 }
