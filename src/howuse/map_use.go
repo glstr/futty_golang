@@ -12,3 +12,19 @@ func MapMakeUse() {
 		fmt.Printf("nothing")
 	}
 }
+
+//map[string]interface
+func ParseMap(e map[string]interface{}) {
+	for k, v := range e {
+		switch vv := v.(type) {
+		case string:
+			fmt.Printf("key:%s, string:%s\n", k, vv)
+		case int:
+			fmt.Printf("key:%s, string:%d\n", k, vv)
+		case float64:
+			fmt.Printf("key:%s, float:%f\n", k, vv)
+		default:
+			fmt.Printf("unknown")
+		}
+	}
+}
