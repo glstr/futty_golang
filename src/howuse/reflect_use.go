@@ -1,9 +1,44 @@
 package howuse
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 )
+
+//basic usage
+type Animal interface {
+	Roar()
+}
+
+type Cat struct {
+	Name string
+	Age  int32
+}
+
+func (c *Cat) Roar() {
+	fmt.Println("It is a cat")
+}
+
+func RfMu() {
+	//reflect.Type
+	var animal Animal
+	cat := &Cat{}
+	animal = cat
+	t := reflect.TypeOf(animal).Elem()
+	fmt.Println(t.Name())
+	fmt.Println(t.Kind())
+
+	tt := reflect.TypeOf(t).Elem()
+	fmt.Println(tt.Name())
+	fmt.Println(tt.Kind())
+
+	//reflect.Value
+	v := reflect.ValueOf(animal).Elem()
+	v.Field(0).SetString("hello")
+	v.Field(1).SetInt(32)
+	fmt.Println(animal)
+}
 
 //map to struct && struct to map
 
@@ -57,4 +92,80 @@ func StructToMap() {
 	}
 	res := structToMap(singer)
 	fmt.Println(res)
+}
+
+// reflect usage of function
+// modify function
+type OldFunc func(a, b int32) int32
+
+func MakeFunc() {
+	examfunc := func(a, b int32) int32 {
+		return int32(a - b)
+	}
+
+	oldFunc, err := makeFunc(examfunc)
+	if err != nil {
+		fmt.Println(err)
+	}
+	ret := oldFunc(2, 3)
+	fmt.Println(ret)
+}
+
+func makeFunc(action interface{}) (OldFunc, error) {
+	t := reflect.TypeOf(action)
+	if t.Kind() != reflect.Func {
+		return nil, errors.New(PARAM_ERROR)
+	}
+
+	wrap := func(args []reflect.Value) []reflect.Value {
+		fmt.Println(args)
+		a, b, err := prepare(args)
+		fmt.Printf("a:%d, b:%d, err:%v", a, b, err)
+
+		oa := reflect.New(t.In(0)).Elem()
+		ob := reflect.New(t.In(1)).Elem()
+
+		oa.SetInt(int64(a))
+		ob.SetInt(int64(b))
+		params := []reflect.Value{
+			oa,
+			ob,
+		}
+		ret := reflect.ValueOf(action).Call(params)
+		var res []reflect.Value
+		res = append(res, ret[0])
+		return res
+	}
+
+	var f OldFunc
+	ft := reflect.ValueOf(&f).Elem()
+	fv := reflect.MakeFunc(ft.Type(), wrap)
+	ft.Set(fv)
+	return f, nil
+}
+
+func prepare(args []reflect.Value) (int32, int32, error) {
+	var a int32
+	var b int32
+	if len(args) != 2 {
+		return a, b, errors.New(PARAM_ERROR)
+	}
+
+	if !args[0].CanInterface() || !args[1].CanInterface() {
+		return a, b, errors.New(PARAM_ERROR)
+	}
+
+	i1 := args[0].Interface()
+	i2 := args[1].Interface()
+
+	var ok bool
+	if a, ok = i1.(int32); !ok {
+		return a, b, errors.New(PARAM_ERROR)
+	}
+
+	if b, ok = i2.(int32); !ok {
+		return a, b, errors.New(PARAM_ERROR)
+	}
+
+	return a, b, nil
 }
