@@ -40,6 +40,34 @@ func RfMu() {
 	fmt.Println(animal)
 }
 
+func RfEleMU() {
+	m := map[string]string{"hello": "world"}
+
+	t := reflect.TypeOf(m).Elem()
+	v := reflect.ValueOf(m)
+
+	fmt.Println(t.Kind())
+	fmt.Println(v.Kind())
+
+	example := func(tm map[string]string) {
+		tmv := reflect.ValueOf(tm)
+		tmt := reflect.TypeOf(tm)
+
+		kt := tmt.Key()
+		vt := tmt.Elem()
+
+		ktv := reflect.New(kt).Elem()
+		vtv := reflect.New(vt).Elem()
+
+		ktv.SetString("snow")
+		vtv.SetString("window")
+
+		tmv.SetMapIndex(ktv, vtv)
+	}
+	example(m)
+	fmt.Println(m)
+}
+
 //map to struct && struct to map
 
 type Singer struct {
@@ -168,4 +196,51 @@ func prepare(args []reflect.Value) (int32, int32, error) {
 	}
 
 	return a, b, nil
+}
+
+// reflect like func template
+func AddInt(a, b int) int {
+	return a + b
+}
+
+func AddFloat(a, b float32) float32 {
+	return a + b
+}
+
+type AddIntType func(int, int) int
+type AddFloatType func(float32, float32) float32
+
+func implement(in []reflect.Value) []reflect.Value {
+	addInt := func(a, b int) int {
+		return a + b
+	}
+
+	addFloat := func(a, b float32) float32 {
+		return a + b
+	}
+
+	if len(in) != 2 {
+		return []reflect.Value{}
+	}
+
+	if in[0].Type().Kind() == reflect.Float32 {
+		return reflect.ValueOf(addFloat).Call(in)
+	} else if in[0].Type().Kind() == reflect.Int {
+		return reflect.ValueOf(addInt).Call(in)
+	} else {
+		return []reflect.Value{}
+	}
+}
+
+func getNewFunc(fptr interface{}) {
+	fn := reflect.ValueOf(fptr).Elem()
+	v := reflect.MakeFunc(fn.Type(), implement)
+	fn.Set(v)
+}
+
+func MafunMU() {
+	var f AddIntType
+	getNewFunc(&f)
+	ret := f(2, 3)
+	fmt.Println(ret)
 }
