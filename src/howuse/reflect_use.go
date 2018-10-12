@@ -124,6 +124,8 @@ func StructToMap() {
 
 // reflect usage of function
 // modify function
+// target funcA { funcB }
+// funcA := wrap(funcB)
 type OldFunc func(a, b int32) int32
 
 func MakeFunc() {
@@ -165,6 +167,7 @@ func makeFunc(action interface{}) (OldFunc, error) {
 		return res
 	}
 
+	//make new func
 	var f OldFunc
 	ft := reflect.ValueOf(&f).Elem()
 	fv := reflect.MakeFunc(ft.Type(), wrap)
