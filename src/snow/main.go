@@ -9,5 +9,12 @@ func main() {
 			"message": "snow",
 		})
 	})
+	r.GET("hello", HelloWorld)
 	r.Run()
+}
+
+func HelloWorld(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"hello": "world",
+	})
 }
