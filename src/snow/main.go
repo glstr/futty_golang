@@ -16,7 +16,9 @@ func main() {
 	r.GET("/ping", snow)
 	r.GET("/hello", helloWorld)
 	r.POST("/upload", upload)
-	r.Run()
+
+	r.StaticFile("/text", "./data/text.txt")
+	r.Run(":8765")
 }
 
 func initLog() {
