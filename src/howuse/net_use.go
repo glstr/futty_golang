@@ -17,3 +17,7 @@ func UserUrlParse() {
 	fmt.Printf("path:%s\n", res.Path)
 	fmt.Printf("query:%s\n", res.RawQuery)
 }
+
+func PostFile() {
+
+}

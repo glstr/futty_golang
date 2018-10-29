@@ -1,23 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"api"
 	"io"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	//初始化日志
 	initLog()
+	//设置路由
 	r := gin.Default()
 	r.GET("/ping", snow)
 	r.GET("/hello", helloWorld)
-	r.POST("/upload", upload)
-
 	r.StaticFile("/text", "./data/text.txt")
+
+	f := api.NewFileOp(r)
+	f.LoadRouter()
+
 	r.Run(":8765")
 }
 
@@ -40,16 +43,4 @@ func helloWorld(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"hello": "world",
 	})
-}
-
-func upload(c *gin.Context) {
-	file, _ := c.FormFile("file")
-	log.Println(file.Filename)
-	defaultPath := "./data/"
-	dst := defaultPath + file.Filename
-	err := c.SaveUploadedFile(file, dst)
-	if err != nil {
-		log.Printf("[save file fail, errMsg:%s]", err.Error())
-	}
-	c.String(http.StatusOK, fmt.Sprintf("%s upload", file.Filename))
 }
