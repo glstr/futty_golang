@@ -8,7 +8,8 @@ import (
 
 func main() {
 	t := time.Now()
-	//howuse.UserUrlParse()
-	howuse.MakePanda()
-	fmt.Printf("cost:%v ms\n", time.Since(t).Nanoseconds()/1000000.0)
+	//howuse.CFile("data/text.txt")
+	howuse.GetDir("data/text.txt")
+	//howuse.MakeDir("./data/hello/")
+	fmt.Printf("cost:%v \n", time.Since(t).Nanoseconds())
 }

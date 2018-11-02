@@ -14,6 +14,8 @@ func main() {
 	initLog()
 	//设置路由
 	r := gin.Default()
+	r.Use(gin.Logger())
+
 	r.GET("/ping", snow)
 	r.GET("/hello", helloWorld)
 	r.StaticFile("/text", "./data/text.txt")
@@ -31,6 +33,7 @@ func initLog() {
 		log.Printf("[init log fail, errMsg:%s]", err.Error())
 	}
 	gin.DefaultWriter = io.MultiWriter(f)
+	log.SetOutput(gin.DefaultWriter)
 }
 
 func snow(c *gin.Context) {
