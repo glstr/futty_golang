@@ -81,3 +81,24 @@ func (r *BlsReader) Read(n int64, p PointCloud) (int64, error) {
 func (r *BlsReader) Load(p PointCloud) error {
 	return nil
 }
+
+//las reader:
+//lasfile: one file format for point cloud
+//support las 1.2 or 1.3
+type LasReader struct {
+	FilePath string
+}
+
+func NewLasReader(path string) *LasReader {
+	return &LasReader{
+		FilePath: path,
+	}
+}
+
+func (r *LasReader) Read(n int64, p PointCloud) (int64, error) {
+	return 0, nil
+}
+
+func (r *LasReader) Load(p PointCloud) error {
+	return nil
+}
