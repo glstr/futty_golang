@@ -13,6 +13,8 @@ func main() {
 	//howuse.MakeDir("./data/hello/")
 	//howuse.Decodejson()
 	//howuse.QueryEscape()
-	howuse.WriteData()
+	//howuse.WriteData()
+	//howuse.ProgramerWork()
+	howuse.ShowSelectCase()
 	fmt.Printf("cost:%v \n", time.Since(t).Nanoseconds())
 }

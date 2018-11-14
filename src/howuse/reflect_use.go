@@ -3,7 +3,9 @@ package howuse
 import (
 	"errors"
 	"fmt"
+	"math/rand"
 	"reflect"
+	"time"
 )
 
 //basic usage
@@ -246,4 +248,50 @@ func MafunMU() {
 	getNewFunc(&f)
 	ret := f(2, 3)
 	fmt.Println(ret)
+}
+
+//usage of SelectCase
+func ShowSelectCase() {
+	//env
+	c1 := make(chan int)
+	c2 := make(chan int)
+	f := func(c chan int) {
+		for i := 0; i < 10; i++ {
+			c <- rand.Intn(100)
+			time.Sleep(1 * time.Second)
+		}
+		close(c)
+	}
+	go f(c1)
+	go f(c2)
+	case1 := reflect.SelectCase{
+		Dir:  reflect.SelectRecv,
+		Chan: reflect.ValueOf(c1),
+	}
+	case2 := reflect.SelectCase{
+		Dir:  reflect.SelectRecv,
+		Chan: reflect.ValueOf(c2),
+	}
+	var cases []reflect.SelectCase
+	cases = append(cases, case1)
+	cases = append(cases, case2)
+
+	for {
+		chosen, recv, recvOk := reflect.Select(cases)
+		fmt.Printf("chosen:%d\n", chosen)
+		if !recvOk {
+			fmt.Println("recv error")
+			break
+		}
+		if !recv.CanInterface() {
+			fmt.Println("value error")
+			break
+		}
+		v, ok := recv.Interface().(int)
+		if !ok {
+			fmt.Println("value trans error")
+			break
+		}
+		fmt.Printf("num:%d\n", v)
+	}
 }
