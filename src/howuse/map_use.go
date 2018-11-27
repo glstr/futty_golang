@@ -11,6 +11,9 @@ func MapMakeUse() {
 	} else {
 		fmt.Printf("nothing")
 	}
+
+	novalue := example["xxx"]
+	fmt.Printf("%d\n", novalue)
 }
 
 //map[string]interface
