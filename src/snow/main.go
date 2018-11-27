@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"snowplat"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,6 +24,9 @@ func main() {
 	f := api.NewFileOp(r)
 	f.LoadRouter()
 
+	//snowplat
+	s := snowplat.NewSnowPlat(r)
+	s.LoadRouter()
 	r.Run(":8765")
 }
 
