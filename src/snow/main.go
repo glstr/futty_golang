@@ -4,6 +4,8 @@ import (
 	"api"
 	"io"
 	"log"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"snowplat"
 
@@ -12,7 +14,12 @@ import (
 
 func main() {
 	//初始化日志
-	initLog()
+	//initLog()
+
+	go func() {
+		log.Println(http.ListenAndServe("localhost:8764", nil))
+	}()
+
 	//设置路由
 	r := gin.Default()
 	r.Use(gin.Logger())
@@ -23,6 +30,8 @@ func main() {
 
 	f := api.NewFileOp(r)
 	f.LoadRouter()
+
+	//config server
 
 	//snowplat
 	s := snowplat.NewSnowPlat(r)

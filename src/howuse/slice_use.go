@@ -20,8 +20,16 @@ func ModifySlice() {
 	fmt.Printf("e1:%v, e2:%v", e1, e2)
 	modify(e1)
 	fmt.Printf("e1:%v, e2:%v", e1, e2)
+
+	var e3 []int
+	appendSlice(e3)
+	fmt.Printf("e3:%v", e3)
 }
 
 func modify(i []int) {
 	i[0] = 7
+}
+
+func appendSlice(i []int) {
+	i = append(i, 4, 3)
 }

@@ -1,8 +1,6 @@
 package snowplat
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,7 +21,10 @@ func (s *SnowPlat) LoadRouter() {
 }
 
 func (s *SnowPlat) home(c *gin.Context) {
-	c.HTML(http.StatusOK, "home.html", gin.H{
-		"title": "home",
+	//c.HTML(http.StatusOK, "home.html", gin.H{
+	//	"title": "home",
+	//})
+	c.JSON(200, gin.H{
+		"hello": "world",
 	})
 }
