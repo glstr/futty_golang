@@ -27,6 +27,7 @@ func NewConfServer(r *gin.Engine) *ConfServer {
 func (s *ConfServer) LoadRouter() {
 	g := s.Router.Group("confserver")
 	g.POST("/get_conf", s.getConf)
+	g.POST("/update_conf", s.updateConf)
 }
 
 func (s *ConfServer) ServiceInit(confFile string) error {
@@ -57,14 +58,14 @@ func (s *ConfServer) getConf(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&getConfReq); err != nil {
 		logBuffer.WriteLog("[err_msg:%s]", err.Error())
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error_msg": err.Error()})
 		return
 	}
 
 	logBuffer.WriteLog("[confid:%s]", getConfReq.ConfId)
 	conf := s.ConfManager.getConf(getConfReq.ConfId)
 	if conf == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "no conf"})
+		c.JSON(http.StatusBadRequest, gin.H{"error_msg": "no conf"})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"conf": conf})
@@ -72,7 +73,52 @@ func (s *ConfServer) getConf(c *gin.Context) {
 }
 
 func (s *ConfServer) updateConf(c *gin.Context) {
+	ct := utils.NewContext()
+	logBuffer := ct.LogBuffer
+	logger := ct.Logger
 
+	defer func() {
+		if err, ok := recover().(error); ok {
+			logBuffer.WriteLog("[error_msg:%s]", err.Error())
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error_code": 2,
+				"error_msg":  err.Error(),
+			})
+		}
+		logger.Info(logBuffer.String())
+	}()
+
+	var updateConfReq struct {
+		ConfId string `json:"conf_id"`
+		Conf   string `json:"conf"`
+	}
+
+	if err := c.ShouldBindJSON(&updateConfReq); err != nil {
+		logBuffer.WriteLog("[err_msg:%s]", err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error_msg": err.Error()})
+		return
+	}
+
+	ok := s.ConfManager.updateConf(updateConfReq.ConfId, updateConfReq.Conf)
+	logBuffer.WriteLog("[update conf]")
+	if ok {
+		//persistent
+		logBuffer.WriteLog("[persist conf]")
+		err := s.ConfManager.persistConf()
+		if err != nil {
+			logBuffer.WriteLog("[err_msg:%s]", err.Error())
+			c.JSON(http.StatusBadRequest, gin.H{"error_msg": err.Error()})
+			return
+		}
+	} else {
+		errMsg := "update conf fail"
+		logBuffer.WriteLog("[err_msg:%s]", errMsg)
+		c.JSON(http.StatusBadRequest, gin.H{"error_msg": errMsg})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"error_code": 0})
+	return
 }
 
 func (s *ConfServer) addConf(c *gin.Context) {
@@ -175,8 +221,11 @@ func (s *confManager) persistConf() error {
 	if err != nil {
 		return err
 	}
-	f.WriteString(string(json))
-	f.Close()
+	defer f.Close()
+	_, err = f.WriteString(string(json))
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -203,7 +252,8 @@ func (s *confManager) loadConf(confFile string) error {
 type confSubscribersManager struct {
 }
 
-func (cfm *confSubscribersManager) subscribe(confId string, callbackAddr string) error {
+func (cfm *confSubscribersManager) subscribe(confId string,
+	callbackAddr string) (string, error) {
 	return nil
 }
 
