@@ -2,19 +2,19 @@ package main
 
 import (
 	"api"
-	"io"
+	"confserver"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
-	"os"
 	"snowplat"
+	"utils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	//初始化日志
-	//initLog()
+	initLog()
 
 	go func() {
 		log.Println(http.ListenAndServe("localhost:8764", nil))
@@ -22,8 +22,10 @@ func main() {
 
 	//设置路由
 	r := gin.Default()
-	r.Use(gin.Logger())
 
+	//middleware
+
+	r.Use(gin.Logger())
 	r.GET("/ping", snow)
 	r.GET("/hello", helloWorld)
 	r.StaticFile("/text", "./data/text.txt")
@@ -32,6 +34,14 @@ func main() {
 	f.LoadRouter()
 
 	//config server
+	confFile := "./conf/confserver.conf"
+	confServer := confserver.NewConfServer(r)
+	err := confServer.ServiceInit(confFile)
+	if err != nil {
+		log.Printf("[err_msg:%s]", err.Error())
+		return
+	}
+	confServer.LoadRouter()
 
 	//snowplat
 	s := snowplat.NewSnowPlat(r)
@@ -40,13 +50,14 @@ func main() {
 }
 
 func initLog() {
-	gin.DisableConsoleColor()
-	f, err := os.Create("log/snow.log")
-	if err != nil {
-		log.Printf("[init log fail, errMsg:%s]", err.Error())
-	}
-	gin.DefaultWriter = io.MultiWriter(f)
-	log.SetOutput(gin.DefaultWriter)
+	utils.LogInit("log/snow.log")
+	//gin.DisableConsoleColor()
+	//f, err := os.Create("log/snow.log")
+	//if err != nil {
+	//	log.Printf("[init log fail, errMsg:%s]", err.Error())
+	//}
+	//gin.DefaultWriter = io.MultiWriter(f)
+	//log.SetOutput(gin.DefaultWriter)
 }
 
 func snow(c *gin.Context) {

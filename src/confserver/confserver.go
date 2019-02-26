@@ -3,8 +3,10 @@ package confserver
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"sync"
+	"utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,15 +26,49 @@ func NewConfServer(r *gin.Engine) *ConfServer {
 
 func (s *ConfServer) LoadRouter() {
 	g := s.Router.Group("confserver")
-	g.GET("/confserver/get_conf", s.getConf)
+	g.POST("/get_conf", s.getConf)
 }
 
-func (s *ConfServer) ServiceInit(confFile string) {
-
+func (s *ConfServer) ServiceInit(confFile string) error {
+	s.ConfManager = newConfManager(confFile)
+	return nil
 }
 
 func (s *ConfServer) getConf(c *gin.Context) {
+	ct := utils.NewContext()
+	logBuffer := ct.LogBuffer
+	logger := ct.Logger
+	logBuffer.WriteLog("[body:%v]", c.Request.Body)
 
+	defer func() {
+		if err, ok := recover().(error); ok {
+			logBuffer.WriteLog("[error_msg:%s]", err.Error())
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error_code": 2,
+				"error_msg":  err.Error(),
+			})
+		}
+		logger.Info(logBuffer.String())
+	}()
+
+	var getConfReq struct {
+		ConfId string `json:"conf_id"`
+	}
+
+	if err := c.ShouldBindJSON(&getConfReq); err != nil {
+		logBuffer.WriteLog("[err_msg:%s]", err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	logBuffer.WriteLog("[confid:%s]", getConfReq.ConfId)
+	conf := s.ConfManager.getConf(getConfReq.ConfId)
+	if conf == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "no conf"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"conf": conf})
+	return
 }
 
 func (s *ConfServer) updateConf(c *gin.Context) {
@@ -56,15 +92,15 @@ func (s *ConfServer) unsubscribeConf(c *gin.Context) {
 }
 
 type confManager struct {
-	Confs    map[string]string
+	Confs    map[string]interface{}
 	mutex    sync.Mutex
 	mutexPes sync.Mutex
 }
 
 type ConfFormat struct {
-	version    string
-	Confs      map[string]string
-	UpdateTime string
+	version    string                 `json:"version"`
+	Confs      map[string]interface{} `json:"confs"`
+	UpdateTime string                 `json:"update_time"`
 }
 
 func newConfManager(confFile string) *confManager {
@@ -82,10 +118,12 @@ func (s *confManager) getConf(confId string) string {
 	defer s.mutex.Unlock()
 	conf, ok := s.Confs[confId]
 	if ok {
-		return conf
-	} else {
-		return InvalidConf
+		confStr, ok := conf.(string)
+		if ok {
+			return confStr
+		}
 	}
+	return InvalidConf
 }
 
 func (s *confManager) updateConf(confId string, newConf string) bool {
@@ -132,7 +170,7 @@ func (s *confManager) persistConf() error {
 
 	s.mutexPes.Lock()
 	defer s.mutexPes.Unlock()
-	confFile := "conf/server.conf"
+	confFile := "./conf/confserver.conf"
 	f, err := os.Open(confFile)
 	if err != nil {
 		return err
@@ -152,7 +190,7 @@ func (s *confManager) loadConf(confFile string) error {
 		return err
 	}
 	var confFormat ConfFormat
-	err = json.Unmarshal(confContent, confFormat)
+	err = json.Unmarshal(confContent, &confFormat)
 	if err != nil {
 		return err
 	}
