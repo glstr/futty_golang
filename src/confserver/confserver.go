@@ -250,13 +250,30 @@ func (s *confManager) loadConf(confFile string) error {
 }
 
 type confSubscribersManager struct {
+	ConfSubsList map[string][]string
+	Mutex        sync.Mutex
 }
 
 func (cfm *confSubscribersManager) subscribe(confId string,
 	callbackAddr string) (string, error) {
-	return nil
+	cfm.Mutex.Lock()
+	defer cfm.Mutex.Unlock()
+	cbAddrList, ok := cfm.ConfSubsList[confId]
+	if ok {
+		cbAddrList = append(cbAddrList, confId)
+	} else {
+		var addLists []string
+		addLists = append(addLists, confId)
+		cfm.ConfSubsList[confId] = addLists
+	}
+	return "", nil
 }
 
 func (cfm *confSubscribersManager) unsubscribe(subscribeId int64, confId string) error {
+	cfm.Mutex.Lock()
+	defer cfm.Mutex.Unlock()
+	cbAddrList, ok := cfm.ConfSubsList[confId]
+	if ok {
+	}
 	return nil
 }
