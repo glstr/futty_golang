@@ -8,7 +8,6 @@ import (
 
 func main() {
 	t := time.Now()
-	//howuse.ShowWGUse()
-	howuse.ModifySlice()
+	howuse.ShowPoolUse()
 	fmt.Printf("cost:%v \n", time.Since(t).Nanoseconds())
 }

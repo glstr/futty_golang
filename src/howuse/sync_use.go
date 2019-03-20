@@ -1,3 +1,8 @@
+/*
+Package howuse show basic usage of go and some go package. In this package you can get some basic examples and patterns for
+some go func and Package
+*/
+
 package howuse
 
 import (
@@ -5,6 +10,7 @@ import (
 	"sync"
 )
 
+//Show waitgroup usage
 func ShowWGUse() {
 	var wg sync.WaitGroup
 	n := 10000
@@ -22,4 +28,29 @@ func ShowWGUse() {
 		sum = sum + v
 	}
 	fmt.Printf("sum:%d", sum)
+}
+
+//ShowCondUse show basic usage of cond
+func ShowCondUse() {
+	c := sync.NewCond(&sync.Mutex{})
+	c.L.Lock()
+	for true {
+		c.Wait()
+	}
+	c.L.Unlock()
+}
+
+//ShowPoolUse show basic usage of pool
+func ShowPoolUse() {
+	myPool := &sync.Pool{
+		New: func() interface{} {
+			fmt.Println("create new instance")
+			return struct{}{}
+		},
+	}
+
+	myPool.Get()
+	instance := myPool.Get()
+	myPool.Put(instance)
+	myPool.Get()
 }

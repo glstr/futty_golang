@@ -33,3 +33,26 @@ var f = 'a' * 1.5
 func CMU() {
 	fmt.Println(f)
 }
+
+//type
+type Header map[string][]string
+
+func ShowTypeUse() {
+	header := make(Header)
+	header["First"] = []string{"hello", "world"}
+	header["Second"] = []string{"Jim", "Lily"}
+	fmt.Printf("header:%v", header)
+}
+
+type HandleFunc func(int, int) int
+
+func add(a, b int) int {
+	return a + b
+}
+
+func ShowTypeUseFunc() {
+	var f HandleFunc
+	f = add
+	res := f(1, 2)
+	fmt.Printf("%d", res)
+}
