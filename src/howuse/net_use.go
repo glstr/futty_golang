@@ -2,6 +2,7 @@ package howuse
 
 import (
 	"fmt"
+	"net"
 	"net/url"
 )
 
@@ -18,6 +19,19 @@ func UserUrlParse() {
 	fmt.Printf("query:%s\n", res.RawQuery)
 }
 
-func PostFile() {
+//IPUse show usage of IP
+func IPUse() {
+	ipStr := "127.0.0.1"
+	ipStr = "10.10.10.10"
+	ip := net.ParseIP(ipStr)
+	ip = ip.To4()
+	fmt.Printf("%v", ip)
 
+	for _, b := range ip {
+		fmt.Printf("%v\n", b)
+	}
+
+	if ip.IsLoopback() {
+		fmt.Printf("it is a loopback address")
+	}
 }

@@ -1,11 +1,46 @@
 package utils
 
-import "errors"
+import (
+	"errors"
+	"reflect"
+)
 
-func MapToStruct(in map[string][]string, out interface{}) error {
-	if len(in) <= 0 {
-		return errors.New("in is empty")
+func StructToMapValue(input interface{}) (map[string]interface{}, error) {
+	inputType := reflect.TypeOf(input)
+	if inputType.Kind() != reflect.Struct {
+		return nil, errors.New("input type error")
 	}
-	//parse out, get json tag and field type
-	return nil
+	inputValue := reflect.ValueOf(input)
+
+	numField := inputType.NumField()
+	res := make(map[string]interface{})
+	for i := 0; i < numField; i++ {
+		if inputValue.Field(i).CanInterface() {
+			key := inputType.Field(i).Tag.Get("json")
+			value := inputValue.Field(i).Interface()
+			res[key] = value
+		}
+	}
+	return res, nil
+}
+
+func StructToMapAddr(input interface{}) (map[string]interface{}, error) {
+	inputType := reflect.TypeOf(input)
+	if inputType.Kind() != reflect.Ptr {
+		return nil, errors.New("input type error")
+	}
+	eleType := inputType.Elem()
+	if eleType != reflect.Struct {
+		return nil, errors.New("input type error")
+	}
+	inputValue := reflect.Type(input).Elem()
+
+	numField := eleType.NumField()
+	res := make(map[string]interface{})
+	for i := 0; i < numField; i++ {
+		if inputValue.Field(i).CanAddr() {
+			key := eleType.Field(i).Tag.Get("json")
+			addr := inputValue.Field(i).Addr()
+		}
+	}
 }

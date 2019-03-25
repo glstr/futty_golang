@@ -1,4 +1,4 @@
-package howuse
+package model
 
 import (
 	"errors"

@@ -1,4 +1,4 @@
-package howuse
+package model
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ func makeEnv() {
 type FuncGet func(m *MemCache, key string, t *testing.T)
 type FuncUpdate func(m *MemCache, key string, value int, t *testing.T)
 
-func Test_MemCache(t *testing.T) {
+func TestMemCache(t *testing.T) {
 	makeEnv()
 	var keys = []string{"hello", "world", "gogogo", "snow"}
 
