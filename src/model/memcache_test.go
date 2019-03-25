@@ -58,7 +58,6 @@ func TestMemCache(t *testing.T) {
 		index := i % 3
 		go updateWorker(updateFunc, m, keys[index], i, t)
 	}
-
-	c := make(chan struct{})
-	<-c
+	//c := make(chan struct{})
+	//<-c
 }
