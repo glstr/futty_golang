@@ -4,7 +4,7 @@ import "testing"
 
 func init() {
 	Load("conf/rdguard_go.conf")
-	LogInit()
+	LogInit("log/utils.log")
 }
 
 func TestWriteLog(t *testing.T) {

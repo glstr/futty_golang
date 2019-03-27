@@ -1,5 +1,17 @@
 package model
 
+import "log"
+
+//SelectFor provides example of usage for select for pattern
+func SelectFor(done <-chan interface{}) {
+	for {
+		select {
+		case <-done:
+			log.Println("done")
+		}
+	}
+}
+
 //OrChannel provides example of usage for or channel
 func OrChannel(channels ...<-chan interface{}) <-chan interface{} {
 	switch len(channels) {

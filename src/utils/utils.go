@@ -30,17 +30,19 @@ func StructToMapAddr(input interface{}) (map[string]interface{}, error) {
 		return nil, errors.New("input type error")
 	}
 	eleType := inputType.Elem()
-	if eleType != reflect.Struct {
+	if eleType.Kind() != reflect.Struct {
 		return nil, errors.New("input type error")
 	}
-	inputValue := reflect.Type(input).Elem()
 
+	inputValue := reflect.ValueOf(input).Elem()
 	numField := eleType.NumField()
 	res := make(map[string]interface{})
 	for i := 0; i < numField; i++ {
 		if inputValue.Field(i).CanAddr() {
 			key := eleType.Field(i).Tag.Get("json")
-			addr := inputValue.Field(i).Addr()
+			addr := inputValue.Field(i).Addr().Interface()
+			res[key] = addr
 		}
 	}
+	return res, nil
 }
