@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"log"
+	"reflect"
 	"strings"
 	"utils"
 
@@ -196,10 +197,11 @@ func MysqlUpdate(condition map[string]interface{}, value interface{}) error {
 
 //MysqlSelect provides select interface from mysql
 //select field1, field2 from table where field3 = ?, field4 = ?
-func MysqlSelect(condition map[string]interface{}, value interface{}) error {
+func MysqlSelect(condition map[string]interface{}, value interface{}) ([]interface{}, error) {
+	var res []interface{}
 	data, err := utils.StructToMapAddr(value)
 	if err != nil {
-		return err
+		return res, err
 	}
 
 	var fields []string
@@ -217,15 +219,16 @@ func MysqlSelect(condition map[string]interface{}, value interface{}) error {
 	log.Printf("selectsql:%s", selectSql)
 	rows, err := db.Query(selectSql, values...)
 	if err != nil {
-		return err
+		return res, err
 	}
 
 	for rows.Next() {
 		log.Printf("%v", rows)
 		rows.Scan(addrs...)
+		res = append(res, reflect.ValueOf(value).Elem().Interface())
 	}
 
-	return nil
+	return res, nil
 }
 
 //TxUse show usage of transaction in mysql

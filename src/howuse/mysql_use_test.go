@@ -38,8 +38,15 @@ func TestMysqlCURD(t *testing.T) {
 		err := MysqlInsert(data)
 		if err != nil {
 			t.Errorf("error_msg:%s", err.Error())
+		}
+
+		data.TaskID = 1234
+		err = MysqlInsert(data)
+		if err != nil {
+			t.Errorf("error_msg:%s", err.Error())
 			return
 		}
+
 	}
 
 	update := func(t *testing.T) {
@@ -62,31 +69,37 @@ func TestMysqlCURD(t *testing.T) {
 	read := func(t *testing.T) {
 		data := &taskInfo{}
 		condition := map[string]interface{}{
-			"task_id =": 123,
+			"status = ": 0,
 		}
-		err := MysqlSelect(condition, data)
+		res, err := MysqlSelect(condition, data)
 		if err != nil {
 			t.Errorf("error_msg:%s", err.Error())
 			return
 		}
-		t.Logf("res:%v", data)
+		t.Logf("res:%v", res)
 	}
 
-	//delete := func(t *testing.T) {
-	//	condition := map[string]interface{}{
-	//		"task_id =": 123,
-	//	}
-	//	err := MysqlDelete(condition)
-	//	if err != nil {
-	//		t.Errorf("error_msg:%s", err.Error())
-	//		return
-	//	}
-	//}
+	delete := func(t *testing.T) {
+		condition := map[string]interface{}{
+			"task_id =": 123,
+		}
+		err := MysqlDelete(condition)
+		if err != nil {
+			t.Errorf("error_msg:%s", err.Error())
+			return
+		}
+		condition["task_id ="] = 1234
+		err = MysqlDelete(condition)
+		if err != nil {
+			t.Errorf("error_msg:%s", err.Error())
+			return
+		}
+	}
 
 	t.Run("insert", insert)
 	t.Run("update", update)
 	t.Run("select", read)
-	//t.Run("delete", delete)
+	t.Run("delete", delete)
 }
 
 func TestMakeKeysStr(t *testing.T) {
@@ -135,7 +148,7 @@ func TestMakeWhereSqlAndValue(t *testing.T) {
 	expertStr := "name = ? and age = ?"
 	whereSql, values := makeConditionSqlAndValue(condition)
 	if strings.Compare(whereSql, expertStr) != 0 {
-		t.Errorf("where sql error")
+		t.Errorf("where sql error, whereSql:%s, expertStr:%s", whereSql, expertStr)
 	}
 	t.Logf("sql:%s, values:%v", whereSql, values)
 }
