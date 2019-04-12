@@ -25,7 +25,6 @@ func TestMemCache(t *testing.T) {
 
 	getFunc := func(m *MemCache, key string, t *testing.T) {
 		ret, _ := m.Get(key)
-		//t.Logf("res:%v", ret)
 		fmt.Printf("res:%v\n", ret)
 	}
 
@@ -58,6 +57,4 @@ func TestMemCache(t *testing.T) {
 		index := i % 3
 		go updateWorker(updateFunc, m, keys[index], i, t)
 	}
-	//c := make(chan struct{})
-	//<-c
 }

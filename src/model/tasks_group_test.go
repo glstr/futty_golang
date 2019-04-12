@@ -25,6 +25,7 @@ func TestTaskGroup(t *testing.T) {
 			time.Sleep(2 * time.Second)
 		}
 	}()
-	done := make(chan struct{})
-	<-done
+
+	time.Sleep(10 * time.Second)
+	wg.Cancel()
 }

@@ -3,6 +3,7 @@ package howuse
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 	"time"
 )
@@ -93,4 +94,16 @@ loop:
 		time.Sleep(1 * time.Second)
 	}
 
+}
+
+func ShowChannelFunc() {
+	stream := make(chan interface{})
+	go func() {
+		defer close(stream)
+		stream <- 2
+	}()
+
+	for v := range stream {
+		log.Printf("%v", v)
+	}
 }

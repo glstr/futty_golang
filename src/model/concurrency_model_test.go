@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func TestConcurrencyModel(t *testing.T) {
+func TestOrChannel(t *testing.T) {
 	sig := func(after time.Duration) <-chan interface{} {
 		c := make(chan interface{})
 		go func() {
@@ -22,4 +22,8 @@ func TestConcurrencyModel(t *testing.T) {
 		sig(1*time.Second),
 	)
 	t.Logf("done after:%v", time.Since(start))
+}
+
+func TestTee(t *testing.T) {
+
 }

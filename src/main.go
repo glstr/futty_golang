@@ -8,6 +8,7 @@ import (
 
 func main() {
 	t := time.Now()
-	howuse.IPUse()
+	//howuse.ShowChannelFunc()
+	howuse.ExecPythonCmd()
 	fmt.Printf("cost:%v \n", time.Since(t).Nanoseconds())
 }
