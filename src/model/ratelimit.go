@@ -1,4 +1,4 @@
 package model
 
-type RateLimitor struct {
+type RateLimiter interface {
 }
