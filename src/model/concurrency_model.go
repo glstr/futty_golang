@@ -123,3 +123,33 @@ func Tee(done <-chan interface{}, in <-chan interface{}) (<-chan interface{}, <-
 	}()
 	return out1, out2
 }
+
+//Bridge destructure the channel of channels into a simple channel
+func Bridge(done <-chan interface{}, chanStream <-chan <-chan interface{}) <-chan interface{} {
+	valStream := make(chan interface{})
+	go func() {
+		defer close(valStream)
+		for {
+			var stream <-chan interface{}
+			select {
+			case maybeStream, ok := <-chanStream:
+				if ok == false {
+					return
+				}
+				stream = maybeStream
+			case <-done:
+				return
+			}
+			for val := range orDoneChannel(done, stream) {
+				select {
+				case valStream <- val:
+				case <-done:
+				}
+			}
+		}
+	}()
+	return valStream
+}
+
+func Queue() {
+}
