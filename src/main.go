@@ -8,6 +8,6 @@ import (
 
 func main() {
 	t := time.Now()
-	howuse.ParseTime()
+	howuse.ShowTitleUse()
 	fmt.Printf("cost:%v \n", time.Since(t).Nanoseconds())
 }
