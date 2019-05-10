@@ -54,3 +54,5 @@ func ShowPoolUse() {
 	myPool.Put(instance)
 	myPool.Get()
 }
+
+//Condition

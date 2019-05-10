@@ -25,3 +25,21 @@ func TestStructToMapValue(t *testing.T) {
 	}
 	t.Logf("res:%v", resAddr)
 }
+
+func TestGetValueFromInterface(t *testing.T) {
+	exampleA := 6
+	exampleB := "6"
+	exampleC := "dfslfdsl"
+	testGetValueFromInterface(exampleA, t)
+	testGetValueFromInterface(exampleB, t)
+	testGetValueFromInterface(exampleC, t)
+}
+
+func testGetValueFromInterface(input interface{}, t *testing.T) {
+	res, err := GetValueFromInteface(input)
+	if err != nil {
+		t.Errorf("err:%s", err.Error())
+		return
+	}
+	t.Logf("res:%d", res)
+}

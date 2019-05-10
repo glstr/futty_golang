@@ -94,3 +94,19 @@ func modifyText(input string) (string, error) {
 
 	return string(b), nil
 }
+
+type JsonExample struct {
+	Value int64 `json:"value,string"`
+}
+
+func DecodeJson() {
+	e := "{\"value\": 17}"
+
+	var v JsonExample
+	err := json.Unmarshal([]byte(e), &v)
+	if err != nil {
+		log.Printf("%s", err.Error())
+		return
+	}
+	log.Printf("val:%d", v.Value)
+}

@@ -3,6 +3,7 @@ package utils
 import (
 	"errors"
 	"reflect"
+	"strconv"
 )
 
 func StructToMapValue(input interface{}) (map[string]interface{}, error) {
@@ -45,4 +46,19 @@ func StructToMapAddr(input interface{}) (map[string]interface{}, error) {
 		}
 	}
 	return res, nil
+}
+
+func GetIntFromInteface(input interface{}) (int, error) {
+	switch t := input.(type) {
+	case string:
+		val, err := strconv.Atoi(t)
+		if err != nil {
+			return 0, err
+		}
+		return val, nil
+	case int:
+		return t, nil
+	default:
+		return 0, errors.New("unkown type")
+	}
 }
