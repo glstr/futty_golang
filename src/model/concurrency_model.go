@@ -140,7 +140,7 @@ func Bridge(done <-chan interface{}, chanStream <-chan <-chan interface{}) <-cha
 			case <-done:
 				return
 			}
-			for val := range orDoneChannel(done, stream) {
+			for val := range OrDoneChannel(done, stream) {
 				select {
 				case valStream <- val:
 				case <-done:
