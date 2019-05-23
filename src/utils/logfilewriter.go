@@ -15,15 +15,13 @@ type LogFileWriter struct {
 	rec chan *log4go.LogRecord
 
 	// The opened file
-	filename string
-	file     *os.File
-	fileStat *syscall.Stat_t
+	filename     string
+	basefilename string
+	file         *os.File
+	fileStat     *syscall.Stat_t
 
 	// The logging format
 	format string
-
-	// File header/trailer
-	header, trailer string
 
 	// sanitize newlines to prevent log injection
 	sanitize bool
@@ -38,16 +36,13 @@ func (l *LogFileWriter) LogWrite(rec *log4go.LogRecord) {
 
 func (l *LogFileWriter) Close() {
 	close(l.rec)
-	l.mutex.Lock()
-	defer l.mutex.Unlock()
-	l.file.Sync()
 }
 
 func NewLogFileWriter(fname string) *LogFileWriter {
 	w := &LogFileWriter{
 		rec:      make(chan *log4go.LogRecord, log4go.LogBufferLength),
 		filename: fname,
-		format:   "%D %T %L %S %M",
+		format:   "[%D %T] [%L] (%S) %M",
 		sanitize: false,
 	}
 
@@ -58,14 +53,13 @@ func NewLogFileWriter(fname string) *LogFileWriter {
 
 	go func() {
 		defer func() {
+			w.mutex.Lock()
+			defer w.mutex.Unlock()
 			if w.file != nil {
-				fmt.Fprint(w.file, log4go.FormatLogRecord(w.trailer,
-					&log4go.LogRecord{Created: time.Now()}))
-				w.mutex.Lock()
 				w.file.Close()
-				w.mutex.Unlock()
 			}
 		}()
+
 		for {
 			select {
 			case rec, ok := <-w.rec:
@@ -89,10 +83,13 @@ func NewLogFileWriter(fname string) *LogFileWriter {
 }
 
 func (l *LogFileWriter) initLog() error {
+	if l.filename == "" {
+		return errors.New("filename is empty")
+	}
+
+	l.mutex.Lock()
+	defer l.mutex.Unlock()
 	if l.file != nil {
-		fmt.Fprint(l.file, log4go.FormatLogRecord(l.trailer, &log4go.LogRecord{Created: time.Now()}))
-		l.mutex.Lock()
-		defer l.mutex.Unlock()
 		l.file.Close()
 	}
 
@@ -112,8 +109,6 @@ func (l *LogFileWriter) initLog() error {
 		return errors.New("not a syscall.stat_t")
 	}
 	l.fileStat = stat
-	now := time.Now()
-	fmt.Fprint(l.file, log4go.FormatLogRecord(l.header, &log4go.LogRecord{Created: now}))
 	return nil
 }
 
