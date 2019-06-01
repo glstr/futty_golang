@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"time"
+	"utils"
 )
 
 //ShowBufferChannel show usage of buffer channel
@@ -106,4 +107,18 @@ func ShowChannelFunc() {
 	for v := range stream {
 		log.Printf("%v", v)
 	}
+}
+
+func ShowDoneCloseAll() {
+	displayer := utils.NewDisplayer()
+	done := make(chan struct{})
+	for i := 0; i < 2; i++ {
+		go utils.DisplayerFunc(done, displayer)
+	}
+
+	select {
+	case <-time.After(10 * time.Second):
+		close(done)
+	}
+	return
 }

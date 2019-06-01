@@ -2,8 +2,11 @@ package utils
 
 import (
 	"errors"
+	"log"
 	"reflect"
 	"strconv"
+	"sync"
+	"time"
 )
 
 func StructToMapValue(input interface{}) (map[string]interface{}, error) {
@@ -60,5 +63,44 @@ func GetIntFromInteface(input interface{}) (int, error) {
 		return t, nil
 	default:
 		return 0, errors.New("unkown type")
+	}
+}
+
+type Displayer struct {
+	mutex sync.Mutex
+	index int32
+}
+
+func NewDisplayer() *Displayer {
+	return &Displayer{
+		index: 0,
+	}
+}
+
+func (d *Displayer) display() {
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
+	log.Printf("%d", d.index)
+	d.index++
+	return
+}
+
+func (d *Displayer) End() {
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
+	log.Printf("done:%d", d.index)
+	d.index++
+	return
+}
+
+func DisplayerFunc(done chan struct{}, d *Displayer) {
+	for {
+		select {
+		case <-done:
+			d.End()
+			return
+		case <-time.After(1 * time.Second):
+			d.display()
+		}
 	}
 }

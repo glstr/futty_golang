@@ -9,6 +9,6 @@ import (
 func main() {
 	t := time.Now()
 	//howuse.ShowTitleUse()
-	howuse.DecodeJson()
+	howuse.ShowDoneCloseAll()
 	fmt.Printf("cost:%v \n", time.Since(t).Nanoseconds())
 }
