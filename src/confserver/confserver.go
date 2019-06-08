@@ -272,8 +272,9 @@ func (cfm *confSubscribersManager) subscribe(confId string,
 func (cfm *confSubscribersManager) unsubscribe(subscribeId int64, confId string) error {
 	cfm.Mutex.Lock()
 	defer cfm.Mutex.Unlock()
-	cbAddrList, ok := cfm.ConfSubsList[confId]
+	_, ok := cfm.ConfSubsList[confId]
 	if ok {
+		delete(cfm.ConfSubsList, confId)
 	}
 	return nil
 }

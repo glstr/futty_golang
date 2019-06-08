@@ -15,21 +15,17 @@ import (
 func main() {
 	//初始化日志
 	initLog()
-
 	go func() {
 		log.Println(http.ListenAndServe("localhost:8764", nil))
 	}()
-
 	//设置路由
 	r := gin.Default()
 
+	//init module
+
 	//middleware
 
-	r.Use(gin.Logger())
-	r.GET("/ping", snow)
-	r.GET("/hello", helloWorld)
-	r.StaticFile("/text", "./data/text.txt")
-
+	//file server
 	f := api.NewFileOp(r)
 	f.LoadRouter()
 
@@ -43,9 +39,11 @@ func main() {
 	}
 	confServer.LoadRouter()
 
-	//snowplat
+	//snowplat servr
 	s := snowplat.NewSnowPlat(r)
 	s.LoadRouter()
+
+	//start service
 	r.Run(":8765")
 }
 
@@ -58,16 +56,4 @@ func initLog() {
 	//}
 	//gin.DefaultWriter = io.MultiWriter(f)
 	//log.SetOutput(gin.DefaultWriter)
-}
-
-func snow(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"host": "snow",
-	})
-}
-
-func helloWorld(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"hello": "world",
-	})
 }
