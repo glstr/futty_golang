@@ -74,7 +74,6 @@ func addUint32(input []byte, data uint32) []byte {
 
 func WriteResponse(writer io.Writer, res *MessageResponse) error {
 	var temp []byte
-
 	temp = addUint32(temp, res.Logid)
 	temp = addUint32(temp, res.Service)
 	temp = addUint32(temp, res.Method)
