@@ -18,14 +18,19 @@ func TestTaskGroup(t *testing.T) {
 	}()
 
 	wg.Start()
-
+	done := make(chan struct{})
 	go func() {
 		for {
-			wg.Stats()
-			time.Sleep(2 * time.Second)
+			select {
+			case <-done:
+				return
+			default:
+				wg.Stats()
+				time.Sleep(1 * time.Second)
+			}
 		}
 	}()
-
 	time.Sleep(10 * time.Second)
 	wg.Cancel()
+	done <- struct{}{}
 }

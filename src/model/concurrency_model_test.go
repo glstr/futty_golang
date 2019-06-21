@@ -23,7 +23,3 @@ func TestOrChannel(t *testing.T) {
 	)
 	t.Logf("done after:%v", time.Since(start))
 }
-
-func TestTee(t *testing.T) {
-
-}

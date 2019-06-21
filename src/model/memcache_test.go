@@ -30,12 +30,17 @@ func TestMemCache(t *testing.T) {
 
 	updateFunc := func(m *MemCache, key string, value int, t *testing.T) {
 		ret := m.Update(key, value)
-		//t.Logf("res:%v", ret)
 		fmt.Printf("res:%v\n", ret)
 	}
 
+	done := make(chan struct{})
 	getWorker := func(f FuncGet, m *MemCache, key string, t *testing.T) {
 		for {
+			select {
+			case <-done:
+				return
+			default:
+			}
 			f(m, key, t)
 			time.Sleep(1 * time.Second)
 		}
@@ -43,6 +48,11 @@ func TestMemCache(t *testing.T) {
 
 	updateWorker := func(f FuncUpdate, m *MemCache, key string, value int, t *testing.T) {
 		for {
+			select {
+			case <-done:
+				return
+			default:
+			}
 			f(m, key, value, t)
 			time.Sleep(1 * time.Second)
 		}
@@ -57,4 +67,10 @@ func TestMemCache(t *testing.T) {
 		index := i % 3
 		go updateWorker(updateFunc, m, keys[index], i, t)
 	}
+
+	select {
+	case <-time.After(5 * time.Second):
+		close(done)
+	}
+	return
 }

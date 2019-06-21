@@ -2,13 +2,21 @@ package model
 
 import (
 	"errors"
+	"log"
 	"message"
 	"net"
+	"runtime"
 	"sync"
 	"time"
 )
 
+var (
+	statusOK     = 0
+	statusClosed = 1
+)
+
 type Task interface {
+	Work(c net.Conn) error
 }
 
 type MessageTask struct {
@@ -26,34 +34,57 @@ func (mt *MessageTask) Work(c net.Conn) error {
 
 type Conner struct {
 	conn   net.Conn
+	status int
 	cancel chan struct{}
-	done   chan string
 
-	taskStream chan *Task
+	taskStream chan Task
 	timeOut    time.Duration
 	addr       string
 	key        string
 }
 
-func (c *Conner) NewConner(addr string, taskStream chan *Task,
-	done chan string) *Conner {
+func (c *Conner) NewConner(addr string, taskStream chan Task,
+	cancel chan struct{}) *Conner {
 	return &Conner{
-		done:       done,
+		cancel:     cancel,
 		taskStream: taskStream,
 		addr:       addr,
 	}
 }
 
 func (c *Conner) ConnWork() {
+	defer func() {
+		if err, ok := recover().(error); ok {
+			log.Printf("addr:%s, key:%s, error_msg:%s",
+				c.addr, c.key, err.Error())
+			var buf []byte
+			n := runtime.Stack(buf, false)
+			log.Printf("trace:%v", buf[:n])
+		}
+
+		if c.status != statusClosed {
+			c.Close()
+			return
+		}
+	}()
+
 	for {
 		select {
 		case task := <-c.taskStream:
+			if c.status != statusOK {
+				err := c.makeConn()
+				if err != nil {
+					log.Printf("addr:%s, key:%s, error_msg:%s",
+						c.addr, c.key, err.Error())
+					return
+				}
+			}
+
 			err := c.handleTask(task)
 			if err != nil {
 				c.Close()
 				return
 			}
-			return
 		case <-c.cancel:
 			c.Close()
 			return
@@ -64,12 +95,23 @@ func (c *Conner) ConnWork() {
 	}
 }
 
-func (c *Conner) handleTask(t *Task) error {
+func (c *Conner) makeConn() error {
+	conn, err := net.Dial("tcp", c.addr)
+	if err != nil {
+		return err
+	}
+	c.conn = conn
+	c.status = statusOK
 	return nil
+}
+
+func (c *Conner) handleTask(t Task) error {
+	return t.Work(c.conn)
 }
 
 func (c *Conner) Close() error {
 	c.conn.Close()
+	c.status = statusClosed
 	return nil
 }
 
@@ -77,9 +119,9 @@ type Worker struct {
 	key      int32
 	connMu   sync.RWMutex
 	connPool map[string]net.Conn
+	connMax  int
 
-	addr    string
-	connMax int
+	addr string
 
 	taskStream    chan *Task
 	taskStreamMax int
@@ -127,15 +169,27 @@ func (w *Worker) CommitTask(t *Task) error {
 }
 
 type WorkerGroup struct {
-	WorkersNum int32
+	WorkersNum int
+	addrs      []string
 
 	workersMu sync.RWMutex
 	workers   map[string]*Worker
-	addrs     []string
 }
 
-func NewWorkerGroup() *WorkerGroup {
+func NewWorkerGroup(addrs []string) *WorkerGroup {
+	return &WorkerGroup{
+		WorkersNum: len(addrs),
+		addrs:      addrs,
+	}
+}
 
+func (wg *WorkerGroup) Init() {
+}
+
+func (wg *WorkerGroup) Start() {
+}
+
+func (wg *WorkerGroup) Close() {
 }
 
 func (wg *WorkerGroup) CommitTask(t *Task) error {

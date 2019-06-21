@@ -7,8 +7,8 @@ import (
 )
 
 func TestTimerModel(t *testing.T) {
-	timeout := 10 * time.Second
-	interval := 1 * time.Second
+	timeout := 1 * time.Second
+	interval := 100 * time.Millisecond
 
 	w := func() {
 		log.Printf("hello world")
