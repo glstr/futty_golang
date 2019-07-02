@@ -122,3 +122,17 @@ func ShowDoneCloseAll() {
 	}
 	return
 }
+
+func ShowNilChannel() {
+	var doneStream chan struct{}
+	//send to or receive from nil channel will block
+	go func() {
+		<-doneStream
+	}()
+	select {
+	case <-time.After(100 * time.Millisecond):
+		fmt.Println("nil channel will block")
+	case doneStream <- struct{}{}:
+		fmt.Println("send data")
+	}
+}
