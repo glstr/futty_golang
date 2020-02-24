@@ -3,6 +3,7 @@ package utils
 import (
 	"errors"
 	"log"
+	"math/rand"
 	"reflect"
 	"strconv"
 	"sync"
@@ -102,5 +103,18 @@ func DisplayerFunc(done chan struct{}, d *Displayer) {
 		case <-time.After(1 * time.Second):
 			d.display()
 		}
+	}
+}
+
+type ShowData struct {
+	Value int64  `json:"value"`
+	Date  string `json:"date"`
+}
+
+func GenerateData() ShowData {
+	date := time.Now().Format("15:04:05")
+	return ShowData{
+		Value: rand.Int63n(120),
+		Date:  date,
 	}
 }

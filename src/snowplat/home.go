@@ -35,15 +35,17 @@ func NewSnowPlat(r *gin.Engine) *SnowPlat {
 }
 
 func (s *SnowPlat) LoadRouter() {
-	s.Router.LoadHTMLGlob("static/*")
 	g := s.Router.Group("/snow")
-	g.GET("/home.html", s.home)
 	g.GET("/show_msg", s.showmsg)
+	g.GET("/get_data", s.getTestData)
+
+	//file server
+	s.Router.Static("/static", "./static/")
 }
 
 func (s *SnowPlat) home(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"hello": "world",
+	c.HTML(200, "home.html", gin.H{
+		"title": "post",
 	})
 }
 
@@ -75,4 +77,23 @@ func (s *SnowPlat) showmsg(c *gin.Context) {
 	res.Msg = msg
 	c.JSON(http.StatusOK, res)
 	return
+}
+
+type GetDataResponse struct {
+	CommonRes
+	Data utils.ShowData `json:"data"`
+}
+
+func (*SnowPlat) getTestData(c *gin.Context) {
+	ctx := utils.NewContext()
+	defer guardCallback(c, ctx)
+
+	showData := utils.GenerateData()
+	res := &GetDataResponse{
+		CommonRes{
+			errcode.Ok,
+		},
+		showData,
+	}
+	c.JSON(http.StatusOK, res)
 }
