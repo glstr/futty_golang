@@ -10,8 +10,7 @@ type Result struct {
 	Num int64
 }
 type TaskHandler func() *Result
-type ConcurrencyWoker struct {
-}
+type ConcurrencyWoker struct{}
 
 func (w *ConcurrencyWoker) DoTaskInGroup(tasks []TaskHandler) (*Result, error) {
 	var merger ResultMerger
@@ -54,6 +53,72 @@ func (m *ResultMerger) EndResult() (*Result, error) {
 	return endResult, nil
 }
 
-func (w *ConcurrencyWoker) DoTaskInGroupWithChan(tasks []TaskHandler) (*Result, error) {
-	return nil, nil
+func (w *ConcurrencyWoker) DoTaskInGroupWithChan(tasks []TaskHandler) (*Result,
+	error) {
+	var wg sync.WaitGroup
+	resultStream := make(chan *Result, 1)
+	for _, task := range tasks {
+		wg.Add(1)
+		go func() {
+			select {
+			case resultStream <- task():
+				log.Printf("task done")
+			}
+			wg.Done()
+		}()
+	}
+
+	go func() {
+		wg.Wait()
+		close(resultStream)
+	}()
+
+	var sum int64
+	for r := range resultStream {
+		sum += r.Num
+	}
+	log.Printf("sum:%d", sum)
+	endResult := &Result{
+		Num: sum,
+	}
+	return endResult, nil
+}
+
+func (w *ConcurrencyWoker) DoTaskWithFixedGroup(tasks []TaskHandler) (*Result, error) {
+	taskStream := make(chan TaskHandler, 1)
+	resultStream := make(chan *Result, 1)
+	go func() {
+		for _, task := range tasks {
+			taskStream <- task
+		}
+		close(taskStream)
+	}()
+
+	var maxWorkers int = 3
+	var wg sync.WaitGroup
+	for i := 0; i < maxWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			for task := range taskStream {
+				resultStream <- task()
+				log.Printf("task done")
+			}
+			wg.Done()
+		}()
+	}
+
+	go func() {
+		wg.Wait()
+		close(resultStream)
+	}()
+
+	var sum int64
+	for r := range resultStream {
+		sum += r.Num
+	}
+
+	endResult := &Result{
+		Num: sum,
+	}
+	return endResult, nil
 }

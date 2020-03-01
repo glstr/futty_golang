@@ -28,3 +28,25 @@ func TestDoTaskInGroup(t *testing.T) {
 	}
 	t.Logf("result:%v", r)
 }
+
+func TestDoTaskInGroupWithChan(t *testing.T) {
+	var cw ConcurrencyWoker
+	tasks := MakeTask()
+	r, err := cw.DoTaskInGroupWithChan(tasks)
+	if err != nil {
+		t.Errorf("error_msg:%s", err.Error())
+		return
+	}
+	t.Logf("result:%v", r)
+}
+
+func TestDoTaskWithFixedGroup(t *testing.T) {
+	var cw ConcurrencyWoker
+	tasks := MakeTask()
+	r, err := cw.DoTaskWithFixedGroup(tasks)
+	if err != nil {
+		t.Errorf("error_msg:%s", err.Error())
+		return
+	}
+	t.Logf("result:%v", r)
+}
