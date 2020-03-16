@@ -6,6 +6,6 @@ type ErrorInfo struct {
 }
 
 var (
-	Ok            ErrorInfo = ErrorInfo{0, "ok"}
+	OK            ErrorInfo = ErrorInfo{0, "ok"}
 	InternalError ErrorInfo = ErrorInfo{1, "internal error"}
 )

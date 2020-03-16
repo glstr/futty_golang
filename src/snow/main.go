@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	_ "net/http/pprof"
-	"snowplat"
+	"snow/model/service"
 	"utils"
 
 	"github.com/gin-gonic/gin"
@@ -39,8 +39,7 @@ func main() {
 	}
 	confServer.LoadRouter()
 
-	//snowplat servr
-	s := snowplat.NewSnowPlat(r)
+	s := service.NewSnowPlat(r)
 	s.LoadRouter()
 
 	//start service

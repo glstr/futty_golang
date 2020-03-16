@@ -1,4 +1,4 @@
-package snowplat
+package service
 
 import (
 	"errcode"
@@ -9,41 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type SnowPlat struct {
-	Router *gin.Engine
+type HomeService struct{}
+
+var homeService HomeService
+
+func (h *HomeService) LoadService(g *gin.RouterGroup) error {
+	g.GET("/show_msg", h.showmsg)
+	g.GET("/get_data", h.getTestData)
+	return nil
 }
 
-type CommonRes struct {
-	errcode.ErrorInfo
-}
-
-func guardCallback(c *gin.Context, ctx *utils.Context) {
-	if err, ok := recover().(error); ok {
-		ctx.LogBuffer.WriteLog("[error_msg:%s]", err.Error())
-		res := &CommonRes{
-			errcode.InternalError,
-		}
-		c.JSON(http.StatusBadRequest, res)
-	}
-	ctx.Logger.Info(ctx.LogBuffer.String())
-}
-
-func NewSnowPlat(r *gin.Engine) *SnowPlat {
-	return &SnowPlat{
-		Router: r,
-	}
-}
-
-func (s *SnowPlat) LoadRouter() {
-	g := s.Router.Group("/snow")
-	g.GET("/show_msg", s.showmsg)
-	g.GET("/get_data", s.getTestData)
-
-	//file server
-	s.Router.Static("/static", "./static/")
-}
-
-func (s *SnowPlat) home(c *gin.Context) {
+func (s *HomeService) home(c *gin.Context) {
 	c.HTML(200, "home.html", gin.H{
 		"title": "post",
 	})
@@ -54,13 +30,13 @@ type showMsgRes struct {
 	Msg []byte `json:"msg"`
 }
 
-func (s *SnowPlat) showmsg(c *gin.Context) {
+func (s *HomeService) showmsg(c *gin.Context) {
 	ctx := utils.NewContext()
 	defer guardCallback(c, ctx)
 
 	res := &showMsgRes{
 		CommonRes{
-			errcode.Ok,
+			errcode.OK,
 		},
 		[]byte(""),
 	}
@@ -84,14 +60,14 @@ type GetDataResponse struct {
 	Data utils.ShowData `json:"data"`
 }
 
-func (*SnowPlat) getTestData(c *gin.Context) {
+func (*HomeService) getTestData(c *gin.Context) {
 	ctx := utils.NewContext()
 	defer guardCallback(c, ctx)
 
 	showData := utils.GenerateData()
 	res := &GetDataResponse{
 		CommonRes{
-			errcode.Ok,
+			errcode.OK,
 		},
 		showData,
 	}
