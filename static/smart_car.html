@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        function showMsg() {
+            $.get("../snow/show_msg",function(data, status){
+                console.log(data)
+                document.getElementById("demo").innerHTML = data["msg"];
+            }, "json");
+        }
+    </script>
+<body>
+<button type="button" onclick="showMsg()">show msg</button>
+<p id="demo">hi</p>
+</body>
+</html>
+
