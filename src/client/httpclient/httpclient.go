@@ -1,6 +1,7 @@
 package httpclient
 
 import (
+	"crypto/tls"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -20,7 +21,11 @@ type Request struct {
 
 func NewHttpClient(isPool bool) *HttpClient {
 	return &HttpClient{
-		client: &http.Client{},
+		client: &http.Client{
+			Transport: &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			},
+		},
 	}
 }
 
