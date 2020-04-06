@@ -48,9 +48,6 @@ func (t *DownloadTask) getFileNameFromUrl(Url string) string {
 	return strs[len(strs)-1]
 }
 
-func (d *Downloader) Run() {
-}
-
 func (d *Downloader) RunTask(task *DownloadTask) error {
 	if task == nil {
 		return ErrInvalidTask

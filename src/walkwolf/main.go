@@ -10,7 +10,6 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "walkwolf"
-	//app.EnableBashCompletion = true
 	app.Commands = []*cli.Command{
 		{
 			Name:        "client",
@@ -38,8 +37,12 @@ func main() {
 			Aliases:     []string{"wl"},
 			Usage:       "let a walkwolf get all you need",
 			Description: "a wolf is greater than a spider",
-			Action:      action.Client,
+			Action:      action.Walk,
 			Flags: []cli.Flag{
+				&cli.StringFlag{
+					Name:    "cmd",
+					Aliases: []string{"ur"},
+				},
 				&cli.StringFlag{
 					Name:    "rooturl",
 					Aliases: []string{"ru"},
@@ -47,6 +50,10 @@ func main() {
 				&cli.StringFlag{
 					Name:    "rootdir",
 					Aliases: []string{"rd"},
+				},
+				&cli.StringFlag{
+					Name:    "depth",
+					Aliases: []string{"d"},
 				},
 			},
 		},
