@@ -21,10 +21,10 @@ func Walk(c *cli.Context) error {
 	wolf := &WalkWolf{}
 	cmd := c.String("cmd")
 	url := c.String("rooturl")
-	depth := c.String("depth")
+	//depth := c.String("depth")
 	switch cmd {
 	case CmdDetect:
-		return wolf.Detect(url, depth)
+		return wolf.Detect(url)
 	default:
 		return ErrNotSupportCmd
 	}
@@ -33,14 +33,14 @@ func Walk(c *cli.Context) error {
 
 type WalkWolf struct{}
 
-func (w *WalkWolf) Detect(url string, depth int) error {
+func (w *WalkWolf) Detect(url string) error {
 	parser := model.NewHTMLParser()
 	target := &model.Target{
 		RawUrl:  url,
 		Element: "a",
 		Attr:    "href",
 	}
-	result, err := parser.GetTargets(target)
+	result, err := parser.GetTargetFromUrl(target)
 	if err != nil {
 		log.Printf("error_msg:%s", err.Error())
 		return err
