@@ -111,8 +111,8 @@ func (n *TreeNode) preOrderTraversalEx() ([]NodeValue, error) {
 		temp := s.Pop()
 		if tn, ok := temp.(*TreeNode); ok {
 			res = append(res, NodeValue{tn.Value, tn.Level})
-			for _, c := range tn.Children {
-				s.Push(c)
+			for i := len(tn.Children) - 1; i >= 0; i-- {
+				s.Push(tn.Children[i])
 			}
 		}
 	}

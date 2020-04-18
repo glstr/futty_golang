@@ -46,6 +46,18 @@ func (w *WalkWolf) Detect(url string) error {
 		return err
 	}
 	log.Printf("result:%v", result)
+
+	tree := model.NewUrlTree("host")
+	for _, v := range result {
+		tree.Insert(v)
+	}
+
+	nodes, err := tree.Traversal(0)
+	if err != nil {
+		log.Printf("error_msg:%s", err.Error())
+		return err
+	}
+	log.Printf("nodes:%v", nodes)
 	return nil
 }
 

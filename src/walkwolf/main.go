@@ -41,7 +41,7 @@ func main() {
 			Flags: []cli.Flag{
 				&cli.StringFlag{
 					Name:    "cmd",
-					Aliases: []string{"ur"},
+					Aliases: []string{"c"},
 				},
 				&cli.StringFlag{
 					Name:    "rooturl",
