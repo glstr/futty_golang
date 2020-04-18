@@ -5,7 +5,8 @@ import (
 )
 
 const (
-	PreOrderTranverse = 0
+	PreOrderTranverse   = 0
+	LevelOrderTraversal = 1
 )
 
 var (
@@ -19,6 +20,11 @@ type TreeNode struct {
 	Children []*TreeNode
 	Value    string
 	Level    int
+}
+
+type NodeValue struct {
+	Value string
+	Level int
 }
 
 func (n *TreeNode) InsertValues(values []string) error {
@@ -67,39 +73,66 @@ func (n *TreeNode) SetValue(v string) error {
 	return nil
 }
 
-func (n *TreeNode) String(level int) string {
-	//var res string
-	//res = fmt.Sprintf("level:%d, str:%s\n", level, n.Value)
-	//for _, child := range n.Children {
-	//	res += child.String(level + 1)
-	//}
-	//return res
+func (n *TreeNode) String() string {
 	return ""
 }
 
-func (n *TreeNode) Traversal(method int, res *map[int][]string) error {
-	return n.preOrderTraverse(res)
+func (n *TreeNode) Traversal(method int) ([]NodeValue, error) {
+	var res []NodeValue
+	switch method {
+	case PreOrderTranverse:
+		err := n.preOrderTraversal(&res)
+		return res, err
+	case LevelOrderTraversal:
+		return n.levelOrderTraversal()
+	default:
+		return n.preOrderTraversalEx()
+	}
+	return n.preOrderTraversalEx()
 }
 
-func (n *TreeNode) preOrderTraverse(res *map[int][]string) error {
+func (n *TreeNode) preOrderTraversal(res *[]NodeValue) error {
 	if res == nil {
 		return ErrParamInvalid
 	}
 
-	if values, ok := (*res)[n.Level]; ok {
-		(*res)[n.Level] = append(values, n.Value)
-	} else {
-		(*res)[n.Level] = []string{n.Value}
-	}
-
+	*res = append(*res, NodeValue{n.Value, n.Level})
 	for _, child := range n.Children {
-		child.preOrderTraverse(res)
+		child.preOrderTraversal(res)
 	}
 	return nil
 }
 
-func (n *TreeNode) levelOrderTraversal(res *map[int][]string) error {
-	return nil
+func (n *TreeNode) preOrderTraversalEx() ([]NodeValue, error) {
+	var res []NodeValue
+	s := NewStack()
+	s.Push(n)
+	for s.Len() > 0 {
+		temp := s.Pop()
+		if tn, ok := temp.(*TreeNode); ok {
+			res = append(res, NodeValue{tn.Value, tn.Level})
+			for _, c := range tn.Children {
+				s.Push(c)
+			}
+		}
+	}
+	return res, nil
+}
+
+func (n *TreeNode) levelOrderTraversal() ([]NodeValue, error) {
+	var res []NodeValue
+	q := NewQueue()
+	q.Push(n)
+	for q.Len() > 0 {
+		temp := q.Pop()
+		if tn, ok := temp.(*TreeNode); ok {
+			res = append(res, NodeValue{tn.Value, tn.Level})
+			for _, c := range tn.Children {
+				q.Push(c)
+			}
+		}
+	}
+	return res, nil
 }
 
 //UrlTree
@@ -139,11 +172,9 @@ func (t *UrlTree) Get(rawurl string) (*TreeNode, error) {
 }
 
 func (t *UrlTree) String() string {
-	return t.root.String(0)
+	return t.root.String()
 }
 
-func (t *UrlTree) Traversal(method int) (map[int][]string, error) {
-	res := make(map[int][]string)
-	err := t.root.Traversal(method, &res)
-	return res, err
+func (t *UrlTree) Traversal(method int) ([]NodeValue, error) {
+	return t.root.Traversal(method)
 }

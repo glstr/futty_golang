@@ -45,7 +45,7 @@ func (s *Stack) Push(v interface{}) error {
 }
 
 func (s *Stack) Pop() interface{} {
-	ele := s.l.Front()
+	ele := s.l.Back()
 	if ele == nil {
 		return nil
 	}

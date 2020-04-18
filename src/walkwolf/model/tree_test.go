@@ -37,12 +37,36 @@ func TestUrlTreeTraversal(t *testing.T) {
 		t.Errorf("error_msg:%s", err.Error())
 		return
 	}
+	t.Logf("res:%v", res)
+}
 
-	for level, values := range res {
-		var output string
-		for _, value := range values {
-			output += (value + " ")
-		}
-		t.Logf("level:%d, values:%s", level, output)
+func TestPreOrderTraversal(t *testing.T) {
+	tree := makeTestTree()
+	res, err := tree.root.preOrderTraversalEx()
+	if err != nil {
+		t.Errorf("error_msg:%s", err.Error())
+		return
 	}
+	t.Logf("res:%v", res)
+}
+
+func TestLevelOrderTravesal(t *testing.T) {
+	tree := makeTestTree()
+	res, err := tree.root.levelOrderTraversal()
+	if err != nil {
+		t.Errorf("error_msg:%s", err.Error())
+		return
+	}
+	t.Logf("res:%v", res)
+}
+
+func makeTestTree() *UrlTree {
+	testUrl := "path/debug/hello"
+	testUrl1 := "path/test/hello"
+	testUrl2 := "path/debug/hello2"
+	tree := NewUrlTree("root")
+	tree.Insert(testUrl)
+	tree.Insert(testUrl1)
+	tree.Insert(testUrl2)
+	return tree
 }
