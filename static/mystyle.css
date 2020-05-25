@@ -1,0 +1,47 @@
+body {background-color:#b0c4de;}
+#run {
+    height:30px;
+    width:60px;
+    position:absolute;
+    left:100px;
+    top:150px;
+}
+#left {
+    height:30px;
+    width:60px;
+    position:absolute;
+    left:50px;
+    top:200px;
+}
+#back {
+    height:30px;
+    width:60px;
+    position:absolute;
+    left:100px;
+    top:250px;
+}
+#right {
+    height:30px;
+    width:60px;
+    position:absolute;
+    left:150px;
+    top:200px;
+}
+#brake {
+    height:30px;
+    width:200px;
+    position:absolute;
+    left:220px;
+    top:250px;
+}
+#info {
+    height:100px;
+    width:400px;
+    position:absolute;
+    left:10px;
+    top:10px;
+}
+
+
+
+

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
 <html>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
@@ -10,13 +13,51 @@
                 document.getElementById("demo").innerHTML = data["msg"];
             }, "json");
         }
+
+        function run() {
+            $.get("../smartcar/run",function(data, status){
+                console.log(data)
+                document.getElementById("demo").innerHTML = data;
+            });
+        }
+
+        function back() {
+            $.get("../smartcar/back",function(data, status){
+                console.log(data)
+                document.getElementById("demo").innerHTML = data;
+            });
+        }
+
+        function left() {
+            $.get("../smartcar/left",function(data, status){
+                console.log(data)
+                document.getElementById("demo").innerHTML = data;
+            });
+        }
+
+        function right() {
+            $.get("../smartcar/right",function(data, status){
+                console.log(data)
+                document.getElementById("demo").innerHTML = data;
+            });
+        }
+
+        function brake() {
+            $.get("../smartcar/brake",function(data, status){
+                console.log(data)
+                document.getElementById("info").innerHTML = data;
+            });
+        }
     </script>
 <body>
-<button type="button" onclick="showMsg()">up</button>
-<button type="button" onclick="showMsg()">left</button>
-<button type="button" onclick="showMsg()">down</button>
-<button type="button" onclick="showMsg()">right</button>
-<p id="demo">hi</p>
+<button id="run" type="button" onclick="run()">run</button>
+<button id="back" type="button" onclick="back()">back</button>
+<button id="left" type="button" onclick="left()">left</button>
+<button id="right" type="button" onclick="right()">right</button>
+<button id=brake type="button" onclick="brake()">brake</button>
+<div>
+    <textarea id="info" row="10" cols="30">car ready</textarea>
+</div>
 </body>
 </html>
 
