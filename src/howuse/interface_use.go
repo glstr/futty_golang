@@ -2,6 +2,7 @@ package howuse
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 )
 
@@ -45,4 +46,41 @@ func IfaceUse() {
 	j = &funct
 	i.Hello()
 	j.Hello()
+}
+
+type Animal interface {
+	Run()
+}
+
+type Bird interface {
+	Fly()
+}
+
+type Swimmer interface {
+	Swim()
+}
+
+type Duck struct{}
+
+func (d *Duck) Run() {
+	log.Printf("duck is running")
+}
+
+func (d *Duck) Swim() {
+	log.Printf("duck is swim")
+}
+
+type Tiger struct{}
+
+func (t *Tiger) Run() {
+	log.Printf("tiger is running")
+}
+
+func CrossTheRiver(a Animal) {
+	if swimmer, ok := a.(Swimmer); ok {
+		swimmer.Swim()
+		return
+	}
+
+	a.Run()
 }

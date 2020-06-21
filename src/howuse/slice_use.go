@@ -1,6 +1,9 @@
 package howuse
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 //slice basic use
 func MakeAndUse() {
@@ -32,4 +35,16 @@ func modify(i []int) {
 
 func appendSlice(i []int) {
 	i = append(i, 4, 3)
+}
+
+func RemoveFront(l *([]int)) (int, error) {
+	length := len(*l)
+	var ret int
+	if length == 0 {
+		return ret, errors.New("input empty")
+	}
+	ret = (*l)[0]
+	copy(*l, (*l)[1:])
+	*l = (*l)[:length-1]
+	return ret, nil
 }
