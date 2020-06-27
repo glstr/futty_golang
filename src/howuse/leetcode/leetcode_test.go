@@ -47,3 +47,51 @@ func TestIsMatch(t *testing.T) {
 
 func TestMaxPathNum(t *testing.T) {
 }
+
+func TestTwoNum(t *testing.T) {
+	nums := []int{2, 7, 11, 15}
+	target := 9
+	res := twoSum(nums, target)
+	t.Logf("res:%v", res)
+	if res[0] != 0 && res[1] != 1 {
+		t.Errorf("res:%v, expect:0, 1", res)
+	}
+}
+
+func TestWordBreak(t *testing.T) {
+	type unicase struct {
+		s      string
+		wd     []string
+		expect bool
+	}
+
+	cases := []unicase{
+		unicase{
+			s:      "leetcode",
+			wd:     []string{"leet", "code"},
+			expect: true,
+		},
+		unicase{
+			s:      "applepenapple",
+			wd:     []string{"apple", "pen"},
+			expect: true,
+		},
+		unicase{
+			s:      "catsandog",
+			wd:     []string{"cats", "dog", "sand", "and", "cat"},
+			expect: false,
+		},
+		unicase{
+			s:      "applepie",
+			wd:     []string{"pie", "pear", "apple", "peach"},
+			expect: true,
+		},
+	}
+
+	for _, c := range cases {
+		ret := wordBreak(c.s, c.wd)
+		if ret != c.expect {
+			t.Errorf("c:%v, expect:%t, real:%t", c, c.expect, ret)
+		}
+	}
+}
