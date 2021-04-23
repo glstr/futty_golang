@@ -8,10 +8,10 @@ package howuse
 import (
 	"fmt"
 	"sync"
+	"testing"
 )
 
-//Show waitgroup usage
-func ShowWGUse() {
+func TestWaitGroup(t *testing.T) {
 	var wg sync.WaitGroup
 	n := 10000
 	res := make([]int64, n)
@@ -27,7 +27,6 @@ func ShowWGUse() {
 	for _, v := range res {
 		sum = sum + v
 	}
-	fmt.Printf("sum:%d", sum)
 }
 
 //ShowCondUse show basic usage of cond
