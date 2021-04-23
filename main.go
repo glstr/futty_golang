@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/glstr/futty_golang/api"
 	"github.com/glstr/futty_golang/confserver"
-	"github.com/glstr/futty_golang/snow/model/service"
+	"github.com/glstr/futty_golang/service"
 	"github.com/glstr/futty_golang/utils"
 	"log"
 	"net/http"
