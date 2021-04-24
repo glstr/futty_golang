@@ -1,32 +1,8 @@
 package service
 
 import (
-	"github.com/glstr/futty_golang/errcode"
-	"github.com/glstr/futty_golang/utils"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
-
-type CommonRes struct {
-	errcode.ErrorInfo
-}
-
-func guardCallback(c *gin.Context, ctx *utils.Context) {
-	if err, ok := recover().(error); ok {
-		ctx.LogBuffer.WriteLog("[error_msg:%s]", err.Error())
-		res := &CommonRes{
-			errcode.InternalError,
-		}
-		c.JSON(http.StatusBadRequest, res)
-	}
-	ctx.Logger.Info(ctx.LogBuffer.String())
-}
-
-var DefaultServices map[string]Service = map[string]Service{
-	"/snow": &homeService,
-	"/cmd":  &cmdService,
-}
 
 type SnowPlat struct {
 	Router   *gin.Engine
@@ -40,7 +16,7 @@ func NewSnowPlat(r *gin.Engine) *SnowPlat {
 	}
 }
 
-func (s *SnowPlat) LoadRouter() {
+func (s *SnowPlat) Load() {
 	for name, service := range s.services {
 		g := s.Router.Group(name)
 		err := service.LoadService(g)
@@ -50,8 +26,4 @@ func (s *SnowPlat) LoadRouter() {
 	}
 	//file server
 	s.Router.Static("/static", "./static/")
-}
-
-type Service interface {
-	LoadService(g *gin.RouterGroup) error
 }

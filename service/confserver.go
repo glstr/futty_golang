@@ -1,14 +1,15 @@
-package confserver
+package service
 
 import (
 	"encoding/json"
-	"github.com/glstr/futty_golang/utils"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"sync"
 
 	"github.com/gin-gonic/gin"
+	"github.com/glstr/futty_golang/context"
+	"github.com/glstr/futty_golang/logger"
 )
 
 const InvalidConf = ""
@@ -36,9 +37,8 @@ func (s *ConfServer) ServiceInit(confFile string) error {
 }
 
 func (s *ConfServer) getConf(c *gin.Context) {
-	ct := utils.NewContext()
+	ct := context.NewContext()
 	logBuffer := ct.LogBuffer
-	logger := ct.Logger
 	logBuffer.WriteLog("[body:%v]", c.Request.Body)
 
 	defer func() {
@@ -49,7 +49,7 @@ func (s *ConfServer) getConf(c *gin.Context) {
 				"error_msg":  err.Error(),
 			})
 		}
-		logger.Info(logBuffer.String())
+		logger.Notice(logBuffer.String())
 	}()
 
 	var getConfReq struct {
@@ -73,9 +73,8 @@ func (s *ConfServer) getConf(c *gin.Context) {
 }
 
 func (s *ConfServer) updateConf(c *gin.Context) {
-	ct := utils.NewContext()
+	ct := context.NewContext()
 	logBuffer := ct.LogBuffer
-	logger := ct.Logger
 
 	defer func() {
 		if err, ok := recover().(error); ok {
@@ -85,7 +84,7 @@ func (s *ConfServer) updateConf(c *gin.Context) {
 				"error_msg":  err.Error(),
 			})
 		}
-		logger.Info(logBuffer.String())
+		logger.Notice(logBuffer.String())
 	}()
 
 	var updateConfReq struct {

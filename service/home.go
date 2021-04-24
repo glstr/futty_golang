@@ -1,10 +1,11 @@
 package service
 
 import (
-	"github.com/glstr/futty_golang/errcode"
-	"github.com/glstr/futty_golang/message"
-	"github.com/glstr/futty_golang/utils"
 	"net/http"
+
+	"github.com/glstr/futty_golang/context"
+	"github.com/glstr/futty_golang/errcode"
+	"github.com/glstr/futty_golang/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,45 +15,13 @@ type HomeService struct{}
 var homeService HomeService
 
 func (h *HomeService) LoadService(g *gin.RouterGroup) error {
-	g.GET("/show_msg", h.showmsg)
 	g.GET("/get_data", h.getTestData)
 	return nil
-}
-
-func (s *HomeService) home(c *gin.Context) {
-	c.HTML(200, "home.html", gin.H{
-		"title": "post",
-	})
 }
 
 type showMsgRes struct {
 	CommonRes
 	Msg []byte `json:"msg"`
-}
-
-func (s *HomeService) showmsg(c *gin.Context) {
-	ctx := utils.NewContext()
-	defer guardCallback(c, ctx)
-
-	res := &showMsgRes{
-		CommonRes{
-			errcode.OK,
-		},
-		[]byte(""),
-	}
-
-	msg, err := message.MakeDefaultMessage()
-	if err != nil {
-		ctx.LogBuffer.WriteLog("[error_msg:%s]", err.Error())
-		res.CommonRes = CommonRes{errcode.InternalError}
-		res.Msg = msg
-		c.JSON(http.StatusBadRequest, res)
-		return
-	}
-
-	res.Msg = msg
-	c.JSON(http.StatusOK, res)
-	return
 }
 
 type GetDataResponse struct {
@@ -61,7 +30,7 @@ type GetDataResponse struct {
 }
 
 func (*HomeService) getTestData(c *gin.Context) {
-	ctx := utils.NewContext()
+	ctx := context.NewContext()
 	defer guardCallback(c, ctx)
 
 	showData := utils.GenerateData()

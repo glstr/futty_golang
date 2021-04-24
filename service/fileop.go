@@ -1,4 +1,4 @@
-package api
+package service
 
 import (
 	"fmt"
@@ -17,21 +17,21 @@ const (
 
 type FileOp struct {
 	DefaultDir string
-	Router     *gin.Engine
 }
 
-func NewFileOp(r *gin.Engine) *FileOp {
+var fileOp = FileOp{"./data"}
+
+func NewFileOp(fileDir string) *FileOp {
 	return &FileOp{
-		DefaultDir: "./data",
-		Router:     r,
+		DefaultDir: fileDir,
 	}
 }
 
-func (f *FileOp) LoadRouter() {
-	g := f.Router.Group("/file")
+func (f *FileOp) LoadService(g *gin.RouterGroup) error {
 	g.POST("/upload", f.upload)
 	g.POST("/list", f.list)
 	g.POST("/download", f.download)
+	return nil
 }
 
 func (f *FileOp) upload(c *gin.Context) {

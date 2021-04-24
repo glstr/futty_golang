@@ -1,12 +1,9 @@
-package utils
+package context
 
 import (
 	"bytes"
 	"fmt"
 	"math/rand"
-	"os"
-
-	log "github.com/sirupsen/logrus"
 )
 
 type logBuffer struct {
@@ -29,28 +26,12 @@ func (l *logBuffer) String() string {
 
 type Context struct {
 	Logid     int64
-	Logger    *log.Entry
 	LogBuffer *logBuffer
 }
 
 func NewContext() *Context {
 	return &Context{
 		Logid:     rand.Int63(),
-		Logger:    GetLogger(),
 		LogBuffer: newLogBuffer(),
 	}
-}
-
-func LogInit(logPath string) {
-	f, err := os.Create(logPath)
-	if err != nil {
-		panic(err)
-	}
-	log.SetOutput(f)
-}
-
-func GetLogger() *log.Entry {
-	return log.WithFields(log.Fields{
-		"module": "rdguard",
-	})
 }

@@ -1,10 +1,11 @@
 package service
 
 import (
-	"github.com/glstr/futty_golang/cmdhandler"
-	"github.com/glstr/futty_golang/errcode"
-	"github.com/glstr/futty_golang/utils"
 	"net/http"
+
+	"github.com/glstr/futty_golang/cmdhandler"
+	"github.com/glstr/futty_golang/context"
+	"github.com/glstr/futty_golang/errcode"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,7 +25,7 @@ type ExecRes struct {
 }
 
 func (s *CmdService) Exec(c *gin.Context) {
-	ctx := utils.NewContext()
+	ctx := context.NewContext()
 	logbuf := ctx.LogBuffer
 	defer guardCallback(c, ctx)
 
