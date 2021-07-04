@@ -4,41 +4,60 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
+	"github.com/glstr/futty_golang/global"
 	"github.com/glstr/futty_golang/httpserver"
 	"github.com/glstr/futty_golang/logger"
 )
 
-func main() {
-	//初始化日志
-	InitModule()
-
-	logger.Notice("start")
-	err := httpserver.StartHttpServer()
-	if err != nil {
-		panic(err)
-	}
-
-	//snow server
-	//r := gin.Default()
-	//s := service.NewSnowPlat(r)
-	//s.Load()
-	//r.Run(":8765")
-
+func initConf() error {
+	confPath := "./conf/snow.conf"
+	global.GConfig.Load(confPath)
+	return nil
 }
 
-func InitModule() {
-	logPath := "log/snow.log"
-	option := new(logger.LogOption)
-	option.LogPath = logPath
-	err := logger.InitLogger(option)
-	if err != nil {
-		panic(err)
+func initLog() error {
+	logPath := global.GConfig.LogConf.LogPath
+	option := &logger.LogOption{
+		LogPath: logPath,
 	}
+	return logger.InitLogger(option)
+}
 
+func initPprof() error {
 	go func() {
 		err := http.ListenAndServe(":8764", nil)
 		if err != nil {
 			panic(err)
 		}
 	}()
+	return nil
+}
+
+func InitModule() error {
+	err := initConf()
+	if err != nil {
+		return err
+	}
+
+	err = initLog()
+	if err != nil {
+		return err
+	}
+
+	err = initPprof()
+	return nil
+}
+
+func main() {
+	//init module,including conf log pprof and so on.
+	err := InitModule()
+	if err != nil {
+		panic(err)
+	}
+
+	logger.Notice("start http service")
+	err = httpserver.StartHttpServer()
+	if err != nil {
+		panic(err)
+	}
 }
