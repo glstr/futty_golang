@@ -4,21 +4,25 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
+	"github.com/glstr/futty_golang/httpserver"
 	"github.com/glstr/futty_golang/logger"
-	"github.com/glstr/futty_golang/service"
-
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	//初始化日志
 	InitModule()
 
+	logger.Notice("start")
+	err := httpserver.StartHttpServer()
+	if err != nil {
+		panic(err)
+	}
+
 	//snow server
-	r := gin.Default()
-	s := service.NewSnowPlat(r)
-	s.Load()
-	r.Run(":8765")
+	//r := gin.Default()
+	//s := service.NewSnowPlat(r)
+	//s.Load()
+	//r.Run(":8765")
 
 }
 

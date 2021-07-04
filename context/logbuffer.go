@@ -7,14 +7,11 @@ import (
 )
 
 type LogBuffer struct {
-	buffer *bytes.Buffer
+	buffer bytes.Buffer
 }
 
 func NewLogBuffer() *LogBuffer {
-	//return new(LogBuffer)
-	return &LogBuffer{
-		buffer: &bytes.Buffer{},
-	}
+	return &LogBuffer{}
 }
 
 func (l *LogBuffer) WriteLog(format string, args ...interface{}) {
