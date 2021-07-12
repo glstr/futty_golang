@@ -12,17 +12,17 @@ func TestLogBufferPool(t *testing.T) {
 	}
 
 	cases := []Case{
-		Case{
+		{
 			input:  "hello world",
 			expect: "hello world",
 		},
 
-		Case{
+		{
 			input:  "debug",
 			expect: "debug",
 		},
 
-		Case{
+		{
 			input:  "smart dog",
 			expect: "smart dog",
 		},

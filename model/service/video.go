@@ -1,12 +1,9 @@
 package service
 
 import (
-	"errors"
 	"sync"
-)
 
-var (
-	ErrNotFound = errors.New("not found")
+	"github.com/glstr/futty_golang/model"
 )
 
 var (
@@ -48,7 +45,7 @@ type DefaultVideoService struct{}
 func (m *DefaultVideoService) GetVideo(videoId int64) (*VideoInfo, error) {
 	path, ok := videos[videoId]
 	if !ok {
-		return nil, ErrNotFound
+		return nil, model.ErrNotFound
 	}
 	return &VideoInfo{videoId, path, ""}, nil
 }
