@@ -6,7 +6,8 @@ import (
 )
 
 func LoadRouter(e *gin.Engine) error {
-	//e.GET("/snow/get_pic", handler.GetPic)
+	e.POST("/snow/file/upload", handler.Upload)
+	e.POST("/snow/file/download", handler.Download)
 
 	e.GET("/snow/get_video", handler.GetVideo)
 	e.GET("/snow/get_video_list", handler.GetVideoList)

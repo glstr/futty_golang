@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"net/http"
 	"os"
 	"path"
 
@@ -31,16 +32,10 @@ func Upload(c *gin.Context) {
 	defer func() {
 		res.CommonResponse.ErrorCode, res.CommonResponse.ErrorMsg =
 			views.GetErrInfoFromErr(err)
-		c.JSON(200, res)
+		c.JSON(http.StatusOK, res)
 		logger.Notice(ctx.LogBuffer.String())
 		context.PutContext(ctx)
 	}()
-
-	var req UploadRequest
-	if err = middleware.GetJsonParam(c, &req); err != nil {
-		ctx.LogBuffer.WriteLog("get_param[failed] error_msg[%s]", err.Error())
-		return
-	}
 
 	container := c.PostForm("container")
 	key := c.PostForm("key")
@@ -48,15 +43,17 @@ func Upload(c *gin.Context) {
 	dir := path.Dir(dstPath)
 	err = os.MkdirAll(dir, os.ModePerm)
 	if err != nil {
+		ctx.LogBuffer.WriteLog("make_dir[failed] error_msg[%s]", err.Error())
 		return
 	}
 
 	file, err := c.FormFile("file")
 	if err != nil {
+		ctx.LogBuffer.WriteLog("form_file[failed] error_msg[%s]", err.Error())
 		return
 	}
 
-	ctx.LogBuffer.WriteLog("file_name[%s], dst_path[%s], dir[%s]", file.Filename, dstPath, dir)
+	ctx.LogBuffer.WriteLog("file_name[%s], dst_path[%s], dir[%s] ", file.Filename, dstPath, dir)
 	err = c.SaveUploadedFile(file, dstPath)
 	if err != nil {
 		ctx.LogBuffer.WriteLog("save_file[failed] error_msg[%s]", err.Error())
