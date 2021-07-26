@@ -3,5 +3,6 @@ package model
 import "errors"
 
 var (
-	ErrNotFound = errors.New("not found")
+	ErrNotFound    = errors.New("not found")
+	ErrNotFoundCmd = errors.New("not found cmd")
 )
