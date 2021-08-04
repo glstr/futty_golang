@@ -82,5 +82,6 @@ func GetVideoList(c *gin.Context) {
 		return
 	}
 
+	ctx.LogBuffer.WriteLog("res[%v]", list)
 	res.VideoIdList = list
 }

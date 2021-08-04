@@ -6,15 +6,11 @@ type CmdService interface {
 	Exec(method string, args ...string) (string, error)
 }
 
-var cmdSers = map[int]CmdService{
-	1: NewPyCmdService(),
+var cmdSers = map[string]CmdService{
+	"test": NewPyCmdService(),
 }
 
-func GetCmdService(serviceType int) CmdService {
-	if ser, ok := cmdSers[serviceType]; ok {
-		return ser
-	}
-
+func GetCmdService() CmdService {
 	return NewPyCmdService()
 }
 

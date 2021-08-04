@@ -6,6 +6,8 @@ import (
 )
 
 func LoadRouter(e *gin.Engine) error {
+	e.POST("/snow/cmdservice/cmd", handler.Cmd)
+
 	e.POST("/snow/file/upload", handler.Upload)
 	e.POST("/snow/file/download", handler.Download)
 
