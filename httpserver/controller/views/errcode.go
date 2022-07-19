@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/glstr/futty_golang/model"
+	"github.com/glstr/futty_golang/service"
 )
 
 var (
@@ -15,7 +15,7 @@ var (
 var ErrStatusMap = map[error]int{
 	ErrParamInvalid: http.StatusBadRequest,
 
-	model.ErrNotFound: http.StatusNotFound,
+	service.ErrNotFound: http.StatusNotFound,
 }
 
 func GetErrInfoFromErr(err error) (int32, string) {

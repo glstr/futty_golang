@@ -1,7 +1,5 @@
 package service
 
-import "github.com/glstr/futty_golang/model"
-
 type CmdService interface {
 	Exec(method string, args ...string) (string, error)
 }
@@ -37,5 +35,5 @@ func (s *PyCmdService) Exec(method string, args ...string) (string, error) {
 		return cmd.Exec(args...)
 	}
 
-	return "", model.ErrNotFoundCmd
+	return "", ErrNotFoundCmd
 }

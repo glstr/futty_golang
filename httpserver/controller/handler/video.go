@@ -6,7 +6,7 @@ import (
 	"github.com/glstr/futty_golang/httpserver/controller/middleware"
 	"github.com/glstr/futty_golang/httpserver/controller/views"
 	"github.com/glstr/futty_golang/logger"
-	"github.com/glstr/futty_golang/model/service"
+	"github.com/glstr/futty_golang/service"
 )
 
 type GetVideoRequest struct {

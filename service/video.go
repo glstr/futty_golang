@@ -3,7 +3,6 @@ package service
 import (
 	"sync"
 
-	"github.com/glstr/futty_golang/model"
 	"github.com/glstr/futty_golang/utils"
 )
 
@@ -35,7 +34,7 @@ type DefaultVideoService struct{}
 func (m *DefaultVideoService) GetVideo(videoId int64) (*VideoInfo, error) {
 	videos := utils.GetTargetFilesFromDir("/media/pi/glstr/download/download", "mp4")
 	if videoId > int64(len(videos)) {
-		return nil, model.ErrNotFound
+		return nil, ErrNotFound
 	}
 
 	return &VideoInfo{videoId, videos[videoId], ""}, nil
