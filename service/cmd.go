@@ -1,22 +1,41 @@
 package service
 
-import (
-	"os/exec"
-)
+import "github.com/glstr/futty_golang/service/model/cmd"
 
-type Cmd struct {
-	Name string `json:"name"`
-	Path string `json:"path"`
+type CmdService interface {
+	Exec(method string, args ...string) (string, error)
 }
 
-func (c *Cmd) Exec(params ...string) (string, error) {
-	var args []string
-	args = append(args, c.Path)
-	args = append(args, params...)
-	cmd := exec.Command(c.Name, args...)
-	res, err := cmd.Output()
-	if err != nil {
-		return string(res), err
+//var cmdSers = map[string]CmdService{
+//	"test": NewPyCmdService(),
+//}
+
+func GetCmdService() CmdService {
+	return NewPyCmdService()
+}
+
+type PyCmdService struct {
+	cmd   string
+	paths map[string]string
+}
+
+func NewPyCmdService() *PyCmdService {
+	return &PyCmdService{
+		cmd: "/usr/bin/python",
+		paths: map[string]string{
+			"test": "/home/pi/pengbaojiang/code/pythonsrc/main.py",
+		},
 	}
-	return string(res), nil
+}
+
+func (s *PyCmdService) Exec(method string, args ...string) (string, error) {
+	if path, ok := s.paths[method]; ok {
+		cmd := cmd.Cmd{
+			Name: s.cmd,
+			Path: path,
+		}
+		return cmd.Exec(args...)
+	}
+
+	return "", ErrNotFoundCmd
 }

@@ -8,6 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/protobuf v1.5.2
+	github.com/jackc/pgx/v4 v4.17.2 // indirect
 	github.com/jeanphorn/log4go v0.0.0-20190526082429-7dbb8deb9468
 	github.com/sirupsen/logrus v1.8.1
 	github.com/smallnest/rpcx v1.6.2

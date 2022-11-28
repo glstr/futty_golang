@@ -44,7 +44,7 @@ func InitModule() error {
 		return err
 	}
 
-	err = initPprof()
+	initPprof()
 	return nil
 }
 
