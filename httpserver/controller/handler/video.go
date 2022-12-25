@@ -10,7 +10,7 @@ import (
 )
 
 type GetVideoRequest struct {
-	VideoId int64 `form:"video_id"`
+	VideoId int64 `form:"video_id" json:"video_id"`
 }
 
 type GetVideoResponse struct {

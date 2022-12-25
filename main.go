@@ -23,6 +23,10 @@ func initLog() error {
 	return logger.InitLogger(option)
 }
 
+func initClientResource() error {
+	return global.GCliResource.Init(&global.GConfig)
+}
+
 func initPprof() error {
 	go func() {
 		err := http.ListenAndServe(":8764", nil)
@@ -40,6 +44,11 @@ func InitModule() error {
 	}
 
 	err = initLog()
+	if err != nil {
+		return err
+	}
+
+	err = initClientResource()
 	if err != nil {
 		return err
 	}

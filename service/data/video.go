@@ -2,24 +2,27 @@ package data
 
 import (
 	"database/sql"
-	"time"
+)
+
+const (
+	TableName = "post_record"
 )
 
 type Post struct {
-	Name     string
-	Author   string
-	Duration int64
+	ID         string `sql_tag:"id"`
+	Name       string `sql_tag:"name"`
+	Author     string `sql_tag:"author"`
+	PostTimeMs int64  `sql_tag:"post_time_ms"`
 
+	Description string `sql_tag:"description"`
 	// file real location
-	Path       string
-	CreateTime time.Time
-	UpdateTime time.Time
+	ResourcePath string `sql_tag:"resource_path"`
 }
 
 type PostRepo interface {
-	Create(p *Post) error
-	Update(p *Post, condition map[string]interface{}) error
-	Get(condition map[string]interface{}) (*Post, error)
+	Insert(p *Post) error
+	Get(condition map[string]interface{}) ([]*Post, error)
+	Update(update map[string]interface{}, condition map[string]interface{}) error
 	Del(condition map[string]interface{}) error
 }
 
@@ -53,18 +56,58 @@ func NewPostRepoSql(db *sql.DB) *PostRepoSql {
 	}
 }
 
-func (r *PostRepoSql) Create(p *Post) error {
-	return nil
+func (r *PostRepoSql) Insert(p *Post) error {
+	sql := NewRawSql(r.db)
+	get, err := StructToMapVal(p)
+	if err != nil {
+		return err
+	}
+	return sql.Insert(TableName, get)
 }
 
-func (r *PostRepoSql) Update(p *Post, condition map[string]interface{}) error {
-	return nil
+func (r *PostRepoSql) Get(condition map[string]interface{}) ([]*Post, error) {
+	var post Post
+	get, err := StructToMapPoint(&post)
+	if err != nil {
+		return nil, err
+	}
+
+	var keys []string
+	for key := range get {
+		keys = append(keys, key)
+	}
+
+	sql := NewRawSql(r.db)
+	sqlResults, err := sql.Select(TableName, keys, condition)
+	if err != nil {
+		return nil, err
+	}
+
+	var results []*Post
+	for sqlResults.Next() {
+		var post Post
+		get, err := StructToMapPoint(&post)
+		if err != nil {
+			continue
+		}
+
+		var points []interface{}
+		for _, point := range get {
+			points = append(points, point)
+		}
+		sqlResults.Scan(points...)
+		results = append(results, &post)
+	}
+
+	return results, nil
 }
 
-func (r *PostRepoSql) Get(condition map[string]interface{}) (*Post, error) {
-	return nil, nil
+func (r *PostRepoSql) Update(update map[string]interface{}, condition map[string]interface{}) error {
+	sql := NewRawSql(r.db)
+	return sql.Update(TableName, update, condition)
 }
 
 func (r *PostRepoSql) Del(condition map[string]interface{}) error {
-	return nil
+	sql := NewRawSql(r.db)
+	return sql.Delete(TableName, condition)
 }
