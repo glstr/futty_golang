@@ -20,7 +20,7 @@ var serviceMap = map[string]DebugService{
 	sqlServiceName: defaultSqlService,
 }
 
-func GetService(service string) (DebugService, error) {
+func GetDebugService(service string) (DebugService, error) {
 	if srv, find := serviceMap[service]; find {
 		return srv, nil
 	}
@@ -40,10 +40,10 @@ func (s *SqlService) Do(method string) (interface{}, error) {
 	repo := data.NewPostRepoSql(global.GCliResource.SqlDB)
 	post := data.Post{
 		ID:           "1",
-		Name:         "first one",
+		Name:         "first",
 		Author:       "snow",
 		PostTimeMs:   time.Now().UnixMilli(),
-		Description:  "first post",
+		Description:  "first",
 		ResourcePath: "nothing",
 	}
 

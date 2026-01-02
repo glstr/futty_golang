@@ -1,0 +1,219 @@
+.world-map-container {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a;
+}
+
+.world-map-header {
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem);
+  background-color: rgba(26, 26, 26, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.world-map-header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.map-info {
+  display: flex;
+  gap: 1.5rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.map-info span {
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.world-map {
+  flex: 1;
+  width: 100%;
+  min-height: 400px;
+  z-index: 1;
+}
+
+/* Leaflet 地图样式覆盖 */
+.world-map :global(.leaflet-container) {
+  background-color: #1a1a1a;
+  font-family: inherit;
+}
+
+.world-map :global(.leaflet-popup-content-wrapper) {
+  background-color: rgba(26, 26, 26, 0.95);
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.world-map :global(.leaflet-popup-tip) {
+  background-color: rgba(26, 26, 26, 0.95);
+}
+
+.world-map :global(.leaflet-control-zoom) {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(26, 26, 26, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.world-map :global(.leaflet-control-zoom a) {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.87);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.world-map :global(.leaflet-control-zoom a:hover) {
+  background-color: rgba(100, 108, 255, 0.3);
+  color: #646cff;
+}
+
+.world-map :global(.leaflet-control-zoom-in),
+.world-map :global(.leaflet-control-zoom-out) {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.map-controls {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background-color: rgba(26, 26, 26, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-legend {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.map-legend h3 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.map-legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.map-legend li {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-legend li::before {
+  content: '📍 ';
+  margin-right: 0.5rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .world-map-container {
+    background-color: #ffffff;
+  }
+  
+  .world-map-header {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .world-map-header h1 {
+    color: #213547;
+  }
+  
+  .map-info {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .map-info span {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .world-map :global(.leaflet-container) {
+    background-color: #ffffff;
+  }
+  
+  .world-map :global(.leaflet-popup-content-wrapper) {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #213547;
+  }
+  
+  .world-map :global(.leaflet-popup-tip) {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .world-map :global(.leaflet-control-zoom) {
+    border: 1px solid #e0e0e0;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .world-map :global(.leaflet-control-zoom a) {
+    background-color: #f5f5f5;
+    color: #213547;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .world-map :global(.leaflet-control-zoom a:hover) {
+    background-color: rgba(116, 123, 255, 0.1);
+    color: #747bff;
+  }
+  
+  .map-controls {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .map-legend h3 {
+    color: #213547;
+  }
+  
+  .map-legend li {
+    color: rgba(0, 0, 0, 0.6);
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+  }
+}
+
+@media (max-width: 768px) {
+  .world-map-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .map-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .map-info span {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .map-legend ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+

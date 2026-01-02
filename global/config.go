@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/glstr/futty_golang/service/data/cockroach"
+	"github.com/glstr/futty_golang/service/data/sqldb"
 )
 
 type HttpServerConfig struct {
@@ -26,9 +26,9 @@ type SqlConfig struct {
 }
 
 type Config struct {
-	LogConf        LogConfig `json:"log_conf"`
-	HttpServerConf string    `json:"http_server_conf"`
-	SqlConf        SqlConfig `json:"sql_conf"`
+	LogConf        LogConfig        `json:"log_conf"`
+	HttpServerConf HttpServerConfig `json:"http_server_conf"`
+	SqlConf        SqlConfig        `json:"sql_conf"`
 
 	// global client
 }
@@ -56,19 +56,19 @@ type ClientResource struct {
 
 func (r *ClientResource) Init(conf *Config) error {
 	sqlConf := conf.SqlConf
-	option := cockroach.ConnOption{
+	option := sqldb.DBOption{
+		Type:     sqldb.MysqlDBType,
 		Host:     sqlConf.Host,
 		Port:     sqlConf.Port,
 		DBName:   sqlConf.DBName,
 		User:     sqlConf.User,
 		Password: sqlConf.Password,
 	}
-
-	h, err := cockroach.NewDBHandler(&option)
+	db, err := sqldb.GetDB(&option)
 	if err != nil {
 		return err
 	}
 
-	GCliResource.SqlDB = h.GetDB()
+	GCliResource.SqlDB = db
 	return nil
 }

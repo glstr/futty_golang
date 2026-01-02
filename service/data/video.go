@@ -8,6 +8,16 @@ const (
 	TableName = "post_record"
 )
 
+//CREATE TABLE post_record(
+//	id varchar(1024),
+//	name varchar(255),
+//  author varchar(255),
+//  post_time_ms bigint,
+//  description varchar(2048),
+//	resource_path varchar(4096),
+//  PRIMARY KEY (id)
+//) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 type Post struct {
 	ID         string `sql_tag:"id"`
 	Name       string `sql_tag:"name"`

@@ -106,6 +106,7 @@ func NewRawSql(db *sql.DB) *RawSql {
 func (rs *RawSql) Insert(tableName string, records map[string]interface{}) error {
 	builder := SqlBuilder{}
 	sqlStr, values := builder.MakeInsertSql(tableName, records)
+	//logger.Notice("insert_sql:%s, values:%v", sqlStr, values)
 	_, err := rs.db.Exec(sqlStr, values...)
 	if err != nil {
 		return err

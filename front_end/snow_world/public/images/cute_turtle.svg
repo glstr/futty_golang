@@ -1,0 +1,62 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 龟壳主体 -->
+  <ellipse cx="100" cy="120" rx="60" ry="50" fill="#4a7c59" stroke="#2d4a35" stroke-width="3"/>
+  
+  <!-- 龟壳纹理 - 六边形图案 -->
+  <path d="M 100 80 L 115 90 L 115 110 L 100 120 L 85 110 L 85 90 Z" fill="#5a8c69" stroke="#2d4a35" stroke-width="1.5"/>
+  <path d="M 100 100 L 115 110 L 115 130 L 100 140 L 85 130 L 85 110 Z" fill="#5a8c69" stroke="#2d4a35" stroke-width="1.5"/>
+  <path d="M 70 100 L 85 90 L 85 110 L 70 120 L 55 110 L 55 90 Z" fill="#5a8c69" stroke="#2d4a35" stroke-width="1.5"/>
+  <path d="M 130 100 L 145 90 L 145 110 L 130 120 L 115 110 L 115 90 Z" fill="#5a8c69" stroke="#2d4a35" stroke-width="1.5"/>
+  
+  <!-- 龟壳中心装饰 -->
+  <circle cx="100" cy="110" r="8" fill="#6ba87a" stroke="#2d4a35" stroke-width="1"/>
+  <circle cx="100" cy="110" r="4" fill="#7bb88a"/>
+  
+  <!-- 头部 -->
+  <ellipse cx="100" cy="60" rx="25" ry="20" fill="#6ba87a" stroke="#2d4a35" stroke-width="2"/>
+  
+  <!-- 左眼 -->
+  <circle cx="90" cy="58" r="6" fill="#ffffff"/>
+  <circle cx="90" cy="58" r="4" fill="#2c3e50"/>
+  <circle cx="91" cy="57" r="1.5" fill="#ffffff" opacity="0.9"/>
+  
+  <!-- 右眼 -->
+  <circle cx="110" cy="58" r="6" fill="#ffffff"/>
+  <circle cx="110" cy="58" r="4" fill="#2c3e50"/>
+  <circle cx="111" cy="57" r="1.5" fill="#ffffff" opacity="0.9"/>
+  
+  <!-- 嘴巴 -->
+  <path d="M 100 68 Q 95 72 92 70" stroke="#2d4a35" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 100 68 Q 105 72 108 70" stroke="#2d4a35" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- 左前腿 -->
+  <ellipse cx="50" cy="110" rx="12" ry="18" fill="#6ba87a" stroke="#2d4a35" stroke-width="2"/>
+  <ellipse cx="45" cy="120" rx="8" ry="6" fill="#5a8c69"/>
+  
+  <!-- 右前腿 -->
+  <ellipse cx="150" cy="110" rx="12" ry="18" fill="#6ba87a" stroke="#2d4a35" stroke-width="2"/>
+  <ellipse cx="155" cy="120" rx="8" ry="6" fill="#5a8c69"/>
+  
+  <!-- 左后腿 -->
+  <ellipse cx="60" cy="150" rx="12" ry="18" fill="#6ba87a" stroke="#2d4a35" stroke-width="2"/>
+  <ellipse cx="55" cy="160" rx="8" ry="6" fill="#5a8c69"/>
+  
+  <!-- 右后腿 -->
+  <ellipse cx="140" cy="150" rx="12" ry="18" fill="#6ba87a" stroke="#2d4a35" stroke-width="2"/>
+  <ellipse cx="145" cy="160" rx="8" ry="6" fill="#5a8c69"/>
+  
+  <!-- 尾巴 -->
+  <ellipse cx="100" cy="165" rx="6" ry="12" fill="#6ba87a" stroke="#2d4a35" stroke-width="2"/>
+  
+  <!-- 龟壳边缘装饰 -->
+  <ellipse cx="100" cy="75" rx="55" ry="45" fill="none" stroke="#3d5a45" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="100" cy="165" rx="55" ry="45" fill="none" stroke="#3d5a45" stroke-width="2" opacity="0.5"/>
+  
+  <!-- 脸颊 -->
+  <ellipse cx="80" cy="65" rx="5" ry="4" fill="#7bb88a" opacity="0.6"/>
+  <ellipse cx="120" cy="65" rx="5" ry="4" fill="#7bb88a" opacity="0.6"/>
+  
+  <!-- 龟壳高光 -->
+  <ellipse cx="100" cy="95" rx="30" ry="25" fill="#7bb88a" opacity="0.3"/>
+</svg>
+

@@ -11,8 +11,7 @@ import (
 
 func initConf() error {
 	confPath := "./conf/snow.conf"
-	global.GConfig.Load(confPath)
-	return nil
+	return global.GConfig.Load(confPath)
 }
 
 func initLog() error {
