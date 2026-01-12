@@ -16,11 +16,10 @@ const (
 )
 
 type TraceRouterResult struct {
-	Hop      int
+	TTL      int
 	Network  string
 	Addr     string
 	Duration time.Duration
-	Data     []byte
 	Error    error
 }
 
@@ -40,7 +39,7 @@ func TraceRouter(target string) ([]*TraceRouterResult, error) {
 	var results []*TraceRouterResult
 	for ttl := 1; ttl <= MaxHops; ttl++ {
 		result := &TraceRouterResult{
-			Hop: ttl,
+			TTL: ttl,
 		}
 
 		// 2. 设置当前包的 TTL
@@ -83,16 +82,22 @@ func TraceRouter(target string) ([]*TraceRouterResult, error) {
 		case ipv4.ICMPTypeTimeExceeded:
 			// 路由器的响应
 			fmt.Printf("%d:  %s  %v\n", ttl, peer, duration)
+			result.Duration = duration
+			result.Network = peer.Network()
+			result.Addr = peer.String()
+			results = append(results, result)
+
 		case ipv4.ICMPTypeEchoReply:
 			// 目标主机的响应
 			fmt.Printf("%d:  %s  %v (Reached)\n", ttl, peer, duration)
 			result.Duration = duration
 			result.Network = peer.Network()
 			result.Addr = peer.String()
+			results = append(results, result)
+			return results, nil
 		default:
 			fmt.Printf("%d:  Unknown Type: %v from %s\n", ttl, rm.Type, peer)
 		}
-		results = append(results, result)
 	}
 	return results, nil
 }

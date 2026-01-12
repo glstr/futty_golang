@@ -858,3 +858,5 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/02 - 23:51:30 | 404 |       3.833µs |       127.0.0.1 | POST     "/snow/router/trace"
+[GIN] 2026/01/02 - 23:51:49 | 404 |       2.462µs |       127.0.0.1 | POST     "/snow/router/trace"

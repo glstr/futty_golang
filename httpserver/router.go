@@ -16,5 +16,8 @@ func LoadRouter(e *gin.Engine) error {
 
 	e.POST("/snow/debug", handler.DebugHandler)
 	e.POST("/snow/chat", handler.ChatHandler)
+
+	e.POST("/snow/router/trace", handler.TraceRouterHandler)
+	e.POST("/snow/router/get", handler.GetRouterInfoHandler)
 	return nil
 }

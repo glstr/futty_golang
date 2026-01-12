@@ -1,8 +1,26 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useState, useRef, useEffect } from 'react'
 import './Navbar.css'
 
 function Navbar() {
   const location = useLocation()
+  const [isToolsOpen, setIsToolsOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsToolsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  const isToolsActive = location.pathname.startsWith('/tools')
 
   return (
     <nav className="navbar">
@@ -50,6 +68,28 @@ function Navbar() {
             >
               世界地图
             </Link>
+          </li>
+          <li className="navbar-item navbar-dropdown" ref={dropdownRef}>
+            <button
+              className={`navbar-link navbar-dropdown-toggle ${isToolsActive ? 'active' : ''}`}
+              onClick={() => setIsToolsOpen(!isToolsOpen)}
+            >
+              工具
+              <span className="dropdown-arrow">▼</span>
+            </button>
+            {isToolsOpen && (
+              <ul className="navbar-dropdown-menu">
+                <li>
+                  <Link 
+                    to="/tools/trace-router" 
+                    className={location.pathname === '/tools/trace-router' ? 'dropdown-link active' : 'dropdown-link'}
+                    onClick={() => setIsToolsOpen(false)}
+                  >
+                    路由追踪
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
           <li className="navbar-item">
             <Link 
