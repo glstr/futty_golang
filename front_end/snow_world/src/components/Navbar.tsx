@@ -5,7 +5,7 @@ import './Navbar.css'
 function Navbar() {
   const location = useLocation()
   const [isToolsOpen, setIsToolsOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -88,6 +88,33 @@ function Navbar() {
                     路由追踪
                   </Link>
                 </li>
+                <li>
+                  <Link 
+                    to="/tools/material" 
+                    className={location.pathname === '/tools/material' ? 'dropdown-link active' : 'dropdown-link'}
+                    onClick={() => setIsToolsOpen(false)}
+                  >
+                    素材展示
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/tools/es-storage" 
+                    className={location.pathname === '/tools/es-storage' ? 'dropdown-link active' : 'dropdown-link'}
+                    onClick={() => setIsToolsOpen(false)}
+                  >
+                    ES存储
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/tools/revenue" 
+                    className={location.pathname === '/tools/revenue' ? 'dropdown-link active' : 'dropdown-link'}
+                    onClick={() => setIsToolsOpen(false)}
+                  >
+                    收益计算
+                  </Link>
+                </li>
               </ul>
             )}
           </li>
@@ -106,4 +133,3 @@ function Navbar() {
 }
 
 export default Navbar
-

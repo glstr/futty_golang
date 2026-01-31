@@ -13,6 +13,7 @@ func LoadRouter(e *gin.Engine) error {
 
 	e.GET("/snow/get_video", handler.GetVideo)
 	e.GET("/snow/get_video_list", handler.GetVideoList)
+	e.GET("/snow/get_material_list", handler.GetMaterialList)
 
 	e.POST("/snow/debug", handler.DebugHandler)
 	e.POST("/snow/chat", handler.ChatHandler)

@@ -5,6 +5,7 @@ import (
 
 	"github.com/glstr/futty_golang/repo/models"
 	"github.com/glstr/futty_golang/rpc/localcache"
+	"github.com/glstr/futty_golang/utils"
 )
 
 type TraceDataRepo interface {
@@ -48,7 +49,7 @@ func (r *traceDataLocalCacheRepo) GetData(target string) (*models.TraceData, err
 	var data models.TraceData
 	err = json.Unmarshal(jsonData, &data)
 	if err != nil {
-		return nil, err
+		return nil, utils.WrapErr(err, "target:%s, origin_data:%v", target, jsonData)
 	}
 	return &data, nil
 }

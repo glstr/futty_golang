@@ -7,6 +7,9 @@ import Chat from './pages/Chat'
 import Gallery from './pages/Gallery'
 import WorldMap from './pages/WorldMap'
 import TraceRouter from './pages/TraceRouter'
+import Revenue from './pages/Revenue'
+import Material from './pages/Material'
+import ESStorage from './pages/ESStorage'
 import About from './pages/About'
 import './App.css'
 
@@ -22,6 +25,9 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/map" element={<WorldMap />} />
         <Route path="/tools/trace-router" element={<TraceRouter />} />
+        <Route path="/tools/revenue" element={<Revenue />} />
+        <Route path="/tools/material" element={<Material />} />
+        <Route path="/tools/es-storage" element={<ESStorage />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </>

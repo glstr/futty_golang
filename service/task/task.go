@@ -88,14 +88,14 @@ func (s *taskService) SetTask(task TaskFunc, extraInfo []byte) (int32, error) {
 }
 
 func (s *taskService) setTask(taskID int32, r *TaskResult) {
-	defer s.Unlock()
 	s.Lock()
+	defer s.Unlock()
 	s.taskResults[taskID] = r
 }
 
 func (s *taskService) GetTask(taskID int32) (*TaskResult, error) {
-	defer s.RUnlock()
 	s.RLock()
+	defer s.RUnlock()
 	r, ok := s.taskResults[taskID]
 	if ok {
 		return r, nil

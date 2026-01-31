@@ -1,11 +1,11 @@
 package nettool
 
 import (
-	"fmt"
 	"net"
 	"os"
 	"time"
 
+	"github.com/glstr/futty_golang/context"
 	"golang.org/x/net/icmp"
 	"golang.org/x/net/ipv4"
 )
@@ -21,9 +21,13 @@ type TraceRouterResult struct {
 	Addr     string
 	Duration time.Duration
 	Error    error
+	Country  string
+	Region   string
+	City     string
+	ISP      string
 }
 
-func TraceRouter(target string) ([]*TraceRouterResult, error) {
+func TraceRouter(logger *context.LogBuffer, target string) ([]*TraceRouterResult, error) {
 	destAddr, err := net.ResolveIPAddr("ip4", target)
 	if err != nil {
 		return nil, err
@@ -61,7 +65,7 @@ func TraceRouter(target string) ([]*TraceRouterResult, error) {
 
 		// 4. 发送数据包
 		if _, err := c.WriteTo(wb, destAddr); err != nil {
-			fmt.Printf("%d: Error sending: %v\n", ttl, err)
+			logger.WriteLog("write to target failed:%s", err.Error())
 			continue
 		}
 
@@ -72,7 +76,10 @@ func TraceRouter(target string) ([]*TraceRouterResult, error) {
 		duration := time.Since(start)
 
 		if err != nil {
-			fmt.Printf("%d:  * * * (Timeout)\n", ttl)
+			logger.WriteLog("%d: * * * timeout", ttl)
+			result.Addr = "*.*.*.*"
+			result.Duration = duration
+			results = append(results, result)
 			continue
 		}
 
@@ -81,23 +88,41 @@ func TraceRouter(target string) ([]*TraceRouterResult, error) {
 		switch rm.Type {
 		case ipv4.ICMPTypeTimeExceeded:
 			// 路由器的响应
-			fmt.Printf("%d:  %s  %v\n", ttl, peer, duration)
 			result.Duration = duration
 			result.Network = peer.Network()
 			result.Addr = peer.String()
+			fillAddRegionInfo(logger, result.Addr, result)
 			results = append(results, result)
 
 		case ipv4.ICMPTypeEchoReply:
 			// 目标主机的响应
-			fmt.Printf("%d:  %s  %v (Reached)\n", ttl, peer, duration)
 			result.Duration = duration
 			result.Network = peer.Network()
 			result.Addr = peer.String()
+			fillAddRegionInfo(logger, result.Addr, result)
 			results = append(results, result)
 			return results, nil
 		default:
-			fmt.Printf("%d:  Unknown Type: %v from %s\n", ttl, rm.Type, peer)
+			logger.WriteLog("%d, unknown type:%v from %s", ttl, rm.Type, peer)
 		}
 	}
 	return results, nil
+}
+
+func fillAddRegionInfo(logger *context.LogBuffer, addr string, result *TraceRouterResult) {
+	if !IsPublicIP(net.IP(addr)) {
+		logger.WriteLog("not public addr:%s ", addr)
+		return
+	}
+
+	regionInfo, err := IP2Region(addr)
+	if err != nil {
+		logger.WriteLog("ip2region failed:%s, ip:%s ", err.Error(), addr)
+		return
+	}
+
+	result.Country = regionInfo.Country
+	result.Region = regionInfo.Region
+	result.City = regionInfo.City
+	result.ISP = regionInfo.ISP
 }

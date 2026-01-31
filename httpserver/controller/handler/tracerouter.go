@@ -8,6 +8,8 @@ import (
 	"github.com/glstr/futty_golang/httpserver/controller/middleware"
 	"github.com/glstr/futty_golang/httpserver/controller/views"
 	"github.com/glstr/futty_golang/logger"
+	"github.com/glstr/futty_golang/repo"
+	"github.com/glstr/futty_golang/repo/models"
 	"github.com/glstr/futty_golang/service/nettool"
 	"github.com/glstr/futty_golang/service/task"
 )
@@ -43,8 +45,32 @@ func TraceRouterHandler(c *gin.Context) {
 	ctx.LogBuffer.WriteLog("IP[%s]", req.IP)
 
 	traceRouterFunc := func() error {
-		_, err := nettool.TraceRouter(req.IP)
+		newLogger := context.NewLogBuffer()
+		newLogger.WriteLog("tracerouter start ")
+		defer func() {
+			logger.Notice(newLogger.String())
+		}()
+		result, err := nettool.TraceRouter(newLogger, req.IP)
 		if err != nil {
+			newLogger.WriteLog("trace router failed, err:%s", err.Error())
+			return err
+		}
+
+		traceDataRepo := repo.GetTraceDataRepo()
+		resultStr, err := json.Marshal(result)
+		if err != nil {
+			newLogger.WriteLog("result marshal failed:%s", err.Error())
+			return err
+		}
+
+		newLogger.WriteLog("trace router result:%s", resultStr)
+		data := &models.TraceData{
+			IP:   req.IP,
+			Data: resultStr,
+		}
+		err = traceDataRepo.SaveData(req.IP, data)
+		if err != nil {
+			newLogger.WriteLog("save data failed:%s", err.Error())
 			return err
 		}
 
@@ -74,7 +100,8 @@ type GetRouterInfoRequest struct {
 }
 
 type GetRouterInfoResponse struct {
-	Result string `json:"result"`
+	Result string         `json:"result"`
+	State  task.TaskState `json:"state"`
 	middleware.CommonResponse
 }
 
@@ -97,7 +124,7 @@ func GetRouterInfoHandler(c *gin.Context) {
 		ctx.LogBuffer.WriteLog("get_param[failed] error_msg[%s]", err.Error())
 		return
 	}
-	ctx.LogBuffer.WriteLog("TaskID[%s]", req.TaskID)
+	ctx.LogBuffer.WriteLog("TaskID[%d]", req.TaskID)
 
 	taskSer := task.GetTaskService()
 	var result *task.TaskResult
@@ -107,8 +134,26 @@ func GetRouterInfoHandler(c *gin.Context) {
 		return
 	}
 
-	if result.GetState() == task.TaskStatFailed ||
-		result.GetState() == task.TaskStatInit {
+	res.State = result.GetState()
+	ctx.LogBuffer.WriteLog("task_state[%d]", res.State)
+	if res.State == task.TaskStatInit || res.State == task.TaskStatFailed {
 		return
 	}
+
+	var traceRouteReq TraceRouterRequest
+	err = json.Unmarshal(result.GetExtraInfo(), &traceRouteReq)
+	if err != nil {
+		ctx.LogBuffer.WriteLog("unmarshal_extra_info[failed] error_msg[%s]", err.Error())
+		return
+	}
+
+	traceDataRepo := repo.GetTraceDataRepo()
+	data, err := traceDataRepo.GetData(traceRouteReq.IP)
+	if err != nil {
+		ctx.LogBuffer.WriteLog("get_data[failed] error_msg[%s]", err.Error())
+		return
+
+	}
+
+	res.Result = string(data.Data)
 }

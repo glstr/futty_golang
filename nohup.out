@@ -860,3 +860,603 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN-debug] Listening and serving HTTP on :8882
 [GIN] 2026/01/02 - 23:51:30 | 404 |       3.833µs |       127.0.0.1 | POST     "/snow/router/trace"
 [GIN] 2026/01/02 - 23:51:49 | 404 |       2.462µs |       127.0.0.1 | POST     "/snow/router/trace"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/13 - 00:11:32 | 204 |     160.752µs |             ::1 | OPTIONS  "/snow/router/trace"
+[GIN] 2026/01/13 - 00:11:32 | 200 |     442.758µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/13 - 00:11:32 | 204 |      10.871µs |             ::1 | OPTIONS  "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:32 | 200 |     282.528µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:33 | 200 |     273.403µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:34 | 200 |     345.693µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:35 | 200 |     332.246µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:36 | 200 |     377.322µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:37 | 200 |     231.319µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:38 | 200 |     115.432µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:39 | 200 |     355.402µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:40 | 200 |     207.178µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:41 | 200 |     352.407µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:42 | 200 |      234.08µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:43 | 200 |     230.096µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:44 | 200 |   18.891884ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:45 | 200 |     230.413µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:46 | 200 |     211.604µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:47 | 200 |     198.009µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:48 | 200 |     287.313µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:11:49 | 200 |     168.621µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:07 | 200 |     422.695µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/13 - 00:12:07 | 200 |      202.77µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:08 | 200 |     387.411µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:09 | 200 |     106.033µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:10 | 200 |     400.876µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:11 | 200 |     167.756µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:12 | 200 |     146.927µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:13 | 200 |      288.62µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:14 | 200 |      162.38µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:15 | 200 |     153.193µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:16 | 200 |     151.446µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:17 | 200 |     236.215µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:18 | 200 |     755.734µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:19 | 200 |     150.996µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:20 | 200 |     248.609µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:21 | 200 |     154.537µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:22 | 200 |     148.465µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:23 | 200 |     232.813µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:24 | 200 |     181.699µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:25 | 200 |     618.469µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:26 | 200 |     147.038µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:27 | 200 |     194.619µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:29 | 200 |     438.412µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:30 | 200 |     200.894µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:31 | 200 |     225.609µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:32 | 200 |     218.653µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:33 | 200 |     300.182µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:34 | 200 |     174.236µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:35 | 200 |     134.577µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:36 | 200 |      367.99µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:37 | 200 |     321.529µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:38 | 200 |     125.991µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:39 | 200 |     151.844µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:40 | 200 |     177.536µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:41 | 200 |     158.016µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:42 | 200 |     371.734µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:43 | 200 |     415.094µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:44 | 200 |      284.19µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:45 | 200 |       304.9µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:46 | 200 |     232.142µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:47 | 200 |     118.993µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:48 | 200 |      677.87µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:49 | 200 |     677.415µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:50 | 200 |     128.853µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:51 | 200 |     267.631µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:12:52 | 200 |       410.1µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/13 - 00:16:44 | 200 |     887.692µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/13 - 00:16:44 | 200 |    1.130709ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:29:57 | 200 |     533.099µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/13 - 00:29:57 | 200 |     778.647µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/13 - 00:37:43 | 200 |     663.203µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/13 - 00:37:43 | 200 |    1.310983ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:44 | 200 |    4.944195ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:45 | 200 |      258.84µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:46 | 200 |     245.471µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:47 | 200 |     238.885µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:48 | 200 |     218.145µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:49 | 200 |     278.713µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:50 | 200 |      377.11µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:51 | 200 |     405.113µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:52 | 200 |     168.353µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:53 | 200 |     258.699µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:54 | 200 |     153.194µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:55 | 200 |     287.741µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:56 | 200 |     212.357µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:37:58 | 200 |     414.264µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:00 | 200 |     248.614µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:02 | 200 |     122.226µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:04 | 200 |     317.367µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:06 | 200 |      450.99µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:08 | 200 |     304.834µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:10 | 200 |     270.664µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:12 | 200 |     359.558µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/13 - 00:38:13 | 200 |     219.471µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:39 | 204 |      82.195µs |             ::1 | OPTIONS  "/snow/router/trace"
+[GIN] 2026/01/14 - 22:29:39 | 200 |      345.02µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:29:39 | 204 |      19.539µs |             ::1 | OPTIONS  "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:39 | 200 |   30.749919ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:40 | 200 |       157.6µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:41 | 200 |     398.009µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:42 | 200 |     312.344µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:43 | 200 |     354.846µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:44 | 200 |    1.038336ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:45 | 200 |     241.025µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:29:46 | 200 |     361.352µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:48 | 200 |    1.310463ms |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:30:48 | 200 |     156.314µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:49 | 200 |     343.549µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:50 | 200 |     353.426µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:51 | 200 |     340.466µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:52 | 200 |     220.276µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:53 | 200 |     163.874µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:54 | 200 |     584.818µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:55 | 200 |     251.962µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:56 | 200 |      423.74µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:57 | 200 |       352.9µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:58 | 200 |     231.421µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:30:59 | 200 |     341.239µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:00 | 200 |     645.337µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:01 | 200 |      237.29µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:02 | 200 |     235.568µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:03 | 200 |     340.046µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:04 | 200 |     229.285µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:05 | 200 |     182.011µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:06 | 200 |      276.28µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:07 | 200 |     358.274µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:09 | 200 |      310.98µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:11 | 200 |     810.355µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:13 | 200 |     118.986µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:15 | 200 |     184.856µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:17 | 200 |    1.098222ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:19 | 200 |     415.808µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:20 | 200 |     243.808µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:21 | 200 |     457.318µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:23 | 200 |      217.95µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:25 | 200 |     301.441µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:27 | 200 |     381.336µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:29 | 200 |     400.987µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:31 | 200 |     298.172µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:31:32 | 200 |     258.904µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/14 - 22:38:48 | 200 |     691.355µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:38:48 | 200 |      393.44µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:49 | 200 |     311.175µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:50 | 200 |     282.158µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:51 | 200 |     255.106µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:52 | 200 |     475.519µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:54 | 200 |     404.679µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:56 | 200 |     586.829µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:38:58 | 200 |     254.456µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:00 | 200 |     404.109µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:02 | 200 |     358.944µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:04 | 200 |     383.077µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:06 | 200 |     326.998µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:08 | 200 |     314.093µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:10 | 200 |     318.487µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:12 | 200 |     171.003µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:14 | 200 |     360.322µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:16 | 200 |     314.086µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:18 | 200 |     317.411µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:20 | 200 |     345.201µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:22 | 200 |     281.198µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:24 | 200 |     360.258µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:26 | 200 |     321.362µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:28 | 200 |     312.608µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:30 | 200 |     310.351µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:32 | 200 |     342.275µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:34 | 200 |     345.793µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:36 | 200 |    1.671529ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:38 | 200 |     361.815µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:40 | 200 |     317.794µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:42 | 200 |     307.497µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:44 | 200 |    2.170997ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:46 | 200 |     253.231µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:48 | 200 |     282.124µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:50 | 200 |     498.718µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:52 | 200 |     283.526µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:54 | 200 |     316.448µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:56 | 200 |     458.843µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:39:58 | 200 |     237.391µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:00 | 200 |     371.097µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:02 | 200 |     233.818µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:04 | 200 |     442.425µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:06 | 200 |      290.41µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:08 | 200 |     325.068µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:09 | 200 |     302.093µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:10 | 200 |     275.204µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/14 - 22:40:35 | 200 |     957.197µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:40:35 | 200 |      654.57µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:37 | 200 |     250.285µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:38 | 200 |     197.157µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:40 | 200 |     427.656µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:41 | 200 |     237.972µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:43 | 200 |      450.28µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:45 | 200 |     319.732µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:47 | 200 |     323.519µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:48 | 200 |     372.571µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:49 | 200 |     200.471µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:51 | 200 |     152.246µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:53 | 200 |     334.475µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:40:55 | 200 |     262.194µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/14 - 22:40:59 | 200 |    1.550388ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:00 | 200 |      219.05µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:01 | 200 |     426.741µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:01 | 200 |     223.945µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:41:01 | 200 |     289.393µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:02 | 200 |      193.46µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:02 | 200 |     237.359µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:03 | 200 |     354.722µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:03 | 200 |     322.954µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:04 | 200 |     316.823µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:04 | 200 |     343.242µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:08 | 200 |     300.203µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:41:08 | 200 |     365.932µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:10 | 200 |     778.535µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:11 | 200 |      425.64µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:13 | 200 |     592.854µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:15 | 200 |     378.722µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:17 | 200 |     299.701µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:19 | 200 |      307.85µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:21 | 200 |     230.536µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:23 | 200 |     174.654µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:24 | 200 |     241.659µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:41:25 | 200 |    5.047373ms |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/14 - 22:43:15 | 200 |     901.311µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:43:15 | 200 |    1.548693ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:16 | 200 |     270.186µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:17 | 200 |     364.516µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:19 | 200 |     256.373µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:21 | 200 |     367.411µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:23 | 200 |      341.12µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:25 | 200 |     498.605µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:27 | 200 |     380.818µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:31 | 200 |     513.444µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:33 | 200 |     483.366µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:35 | 200 |     262.509µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:37 | 200 |     346.958µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:39 | 200 |      395.07µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:41 | 200 |       329.8µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:44 | 200 |     317.477µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:46 | 200 |     249.435µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:48 | 200 |     401.839µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:50 | 200 |      200.93µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:52 | 200 |     281.711µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:54 | 200 |     338.036µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:56 | 200 |     576.537µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:43:58 | 200 |     302.373µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:00 | 200 |     277.114µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:02 | 200 |     347.689µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:04 | 200 |     241.363µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:06 | 200 |     243.599µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:08 | 200 |     533.136µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:10 | 200 |     333.352µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:12 | 200 |     287.891µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:14 | 200 |     327.441µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:16 | 200 |     335.914µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:18 | 200 |     279.832µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:20 | 200 |     447.424µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:22 | 200 |     398.097µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:24 | 200 |      243.68µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:26 | 200 |     269.629µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:28 | 200 |     428.982µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:30 | 200 |     227.962µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:32 | 200 |    1.498276ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:34 | 200 |     251.611µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:36 | 200 |     475.599µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:38 | 200 |     361.826µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:40 | 200 |    9.956345ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:42 | 200 |      452.37µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:44 | 200 |      485.42µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:46 | 200 |     266.433µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:48 | 200 |     146.886µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:50 | 200 |     171.621µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:52 | 200 |     253.327µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:54 | 200 |     292.634µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:56 | 200 |     358.609µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:44:58 | 200 |     244.357µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:00 | 200 |     177.561µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:02 | 200 |      352.03µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:04 | 200 |     241.151µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:06 | 200 |     282.547µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:08 | 200 |     488.064µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:10 | 200 |     384.043µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:12 | 200 |     464.574µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:14 | 200 |      417.02µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:45:16 | 200 |     223.037µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/14 - 22:58:25 | 200 |     574.178µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 22:58:26 | 200 |     254.598µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:27 | 200 |     237.039µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:28 | 200 |     321.098µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:29 | 200 |     222.361µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:30 | 200 |      224.95µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:31 | 200 |     275.004µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:32 | 200 |     340.773µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:33 | 200 |     154.962µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:34 | 200 |     440.114µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:38 | 200 |     157.113µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:40 | 200 |    2.450819ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:46 | 200 |     299.503µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:49 | 200 |     338.863µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:52 | 200 |      335.16µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:54 | 200 |     420.368µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:56 | 200 |     127.868µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:58:58 | 200 |     335.502µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:00 | 200 |     613.276µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:02 | 200 |      310.74µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:04 | 200 |     221.093µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:06 | 200 |     230.364µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:08 | 200 |     410.446µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:10 | 200 |    1.108179ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:12 | 200 |      332.95µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:14 | 200 |     319.783µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:16 | 200 |     214.285µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:18 | 200 |     731.676µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:20 | 200 |      180.89µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:22 | 200 |     441.481µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:24 | 200 |     294.923µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:26 | 200 |     194.748µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:28 | 200 |     591.059µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:30 | 200 |     271.992µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:32 | 200 |     282.389µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:34 | 200 |     521.588µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:36 | 200 |      293.15µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:38 | 200 |     290.182µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:40 | 200 |     320.013µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:42 | 200 |     381.359µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:44 | 200 |     279.071µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:46 | 200 |     207.121µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:48 | 200 |     340.728µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:50 | 200 |     143.714µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:52 | 200 |     321.557µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:54 | 200 |     324.901µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:56 | 200 |     175.802µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 22:59:58 | 200 |     253.209µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:00 | 200 |     974.691µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:02 | 200 |      335.08µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:04 | 200 |     321.849µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:05 | 200 |    1.576129ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:06 | 200 |      220.99µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:07 | 200 |      840.09µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:09 | 200 |     284.788µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:11 | 200 |     314.346µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:13 | 200 |     391.848µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:15 | 200 |     155.868µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:17 | 200 |     401.716µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:19 | 200 |     426.676µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:21 | 200 |     365.693µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:00:23 | 200 |     343.778µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:11 | 200 |      333.37µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 23:01:11 | 200 |     438.778µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:12 | 200 |     282.446µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:13 | 200 |      330.25µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:14 | 200 |     249.283µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:15 | 200 |     287.382µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:16 | 200 |     333.353µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:17 | 200 |     180.627µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:18 | 200 |     367.756µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:19 | 200 |     518.857µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:20 | 200 |     184.257µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:23 | 200 |      869.51µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:25 | 200 |     342.356µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:27 | 200 |     477.477µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:29 | 200 |     176.024µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:35 | 200 |     450.223µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:40 | 200 |     155.937µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:42 | 200 |     330.559µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:44 | 200 |     343.323µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:46 | 200 |     375.444µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:48 | 200 |     193.357µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:50 | 200 |     347.875µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:52 | 200 |     292.951µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:53 | 200 |    1.009741ms |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:54 | 200 |     288.923µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:55 | 200 |     509.362µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:56 | 200 |     566.872µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:57 | 200 |     236.785µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:01:58 | 200 |     331.847µs |             ::1 | POST     "/snow/router/get"
+[GIN] 2026/01/14 - 23:04:12 | 200 |    1.166729ms |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 23:04:16 | 200 |      330.89µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 23:05:27 | 200 |    1.167101ms |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 23:05:27 | 200 |     209.875µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/14 - 23:06:20 | 200 |     846.883µs |             ::1 | POST     "/snow/router/trace"
+[GIN] 2026/01/14 - 23:06:20 | 200 |     865.151µs |             ::1 | POST     "/snow/router/get"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] GET    /snow/get_material_list   --> github.com/glstr/futty_golang/httpserver/controller/handler.GetMaterialList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN-debug] [ERROR] listen tcp :8882: bind: address already in use
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+[GIN-debug] GET    /snow/get_video           --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideo (4 handlers)
+[GIN-debug] GET    /snow/get_video_list      --> github.com/glstr/futty_golang/httpserver/controller/handler.GetVideoList (4 handlers)
+[GIN-debug] GET    /snow/get_material_list   --> github.com/glstr/futty_golang/httpserver/controller/handler.GetMaterialList (4 handlers)
+[GIN-debug] POST   /snow/debug               --> github.com/glstr/futty_golang/httpserver/controller/handler.DebugHandler (4 handlers)
+[GIN-debug] POST   /snow/chat                --> github.com/glstr/futty_golang/httpserver/controller/handler.ChatHandler (4 handlers)
+[GIN-debug] POST   /snow/router/trace        --> github.com/glstr/futty_golang/httpserver/controller/handler.TraceRouterHandler (4 handlers)
+[GIN-debug] POST   /snow/router/get          --> github.com/glstr/futty_golang/httpserver/controller/handler.GetRouterInfoHandler (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8882
+[GIN] 2026/01/23 - 22:50:40 | 200 |     431.249µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/23 - 22:50:40 | 200 |     174.182µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/23 - 22:51:15 | 200 |     650.837µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/23 - 22:51:15 | 200 |    1.210095ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/23 - 22:54:19 | 200 |     858.415µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/23 - 22:54:19 | 200 |     321.882µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/24 - 13:50:49 | 200 |    4.294922ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/24 - 13:50:49 | 200 |     408.339µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/24 - 13:51:52 | 200 |    2.917788ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/24 - 13:51:52 | 200 |     185.429µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/29 - 01:47:39 | 200 |   17.079512ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/29 - 01:47:39 | 200 |    1.288958ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/29 - 09:02:06 | 200 |    1.731179ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/29 - 09:02:06 | 200 |     148.804µs |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/29 - 11:15:39 | 200 |    7.114904ms |             ::1 | GET      "/snow/get_material_list"
+[GIN] 2026/01/29 - 11:15:39 | 200 |     156.983µs |             ::1 | GET      "/snow/get_material_list"

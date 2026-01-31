@@ -234,6 +234,13 @@
   word-break: break-all;
 }
 
+.addr-extra {
+  margin-top: 0.25rem;
+  font-family: inherit;
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .col-duration {
   color: rgba(255, 255, 255, 0.7);
 }
@@ -369,4 +376,3 @@
     gap: 0.5rem;
   }
 }
-

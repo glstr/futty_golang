@@ -1,0 +1,1 @@
+time="2026-01-18T23:45:31+08:00" level=info msg="hello world" func="github.com/glstr/futty_golang/logger.(*LogrusLogger).Notice" file="/Users/sweetie/pengbaojiang/code/gosrc/gopath/src/github.com/glstr/futty_golang/logger/logruslogger.go:32"

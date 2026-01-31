@@ -2,6 +2,8 @@
 export const apiConfig = {
   // 后端服务器地址
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8882',
+  // Kibana地址
+  kibanaBaseURL: import.meta.env.VITE_KIBANA_BASE_URL || 'http://localhost:5601',
   
   // 聊天接口路径
   chatEndpoint: '/snow/chat',
@@ -14,4 +16,3 @@ export const apiConfig = {
     return `${apiConfig.baseURL}${apiConfig.chatEndpoint}`
   }
 }
-

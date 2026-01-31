@@ -1,0 +1,200 @@
+.revenue-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.revenue-header {
+  text-align: center;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.revenue-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.revenue-subtitle {
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.revenue-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.summary-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, rgba(100, 108, 255, 0.2), transparent),
+    rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.summary-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.summary-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fde68a;
+}
+
+.revenue-chart-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.revenue-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.revenue-chart-header h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.revenue-chart-unit {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.revenue-chart-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.revenue-chart-svg {
+  width: 100%;
+  max-width: 100%;
+}
+
+.axis-line {
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1.5;
+}
+
+.grid-line {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+}
+
+.tick-line {
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1.2;
+}
+
+.axis-label {
+  fill: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+}
+
+.axis-label-y {
+  text-anchor: end;
+  dominant-baseline: middle;
+}
+
+.axis-label-x {
+  text-anchor: middle;
+  dominant-baseline: hanging;
+}
+
+.revenue-line {
+  fill: none;
+  stroke: #4ade80;
+  stroke-width: 2.5;
+}
+
+.revenue-point {
+  fill: #22c55e;
+  stroke: #064e3b;
+  stroke-width: 1.5;
+}
+
+@media (prefers-color-scheme: light) {
+  .revenue-header {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .revenue-header h1 {
+    color: #213547;
+  }
+
+  .revenue-subtitle {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .summary-item {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+  }
+
+  .summary-label {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .summary-value {
+    color: #b45309;
+  }
+
+  .revenue-chart-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+  }
+
+  .revenue-chart-header h2 {
+    color: #213547;
+  }
+
+  .revenue-chart-unit {
+    color: rgba(0, 0, 0, 0.6);
+    border-color: #e0e0e0;
+  }
+
+  .axis-line {
+    stroke: rgba(0, 0, 0, 0.5);
+  }
+
+  .grid-line {
+    stroke: rgba(0, 0, 0, 0.05);
+  }
+
+  .tick-line {
+    stroke: rgba(0, 0, 0, 0.6);
+  }
+
+  .axis-label {
+    fill: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width: 768px) {
+  .revenue-summary {
+    grid-template-columns: 1fr;
+  }
+}
+

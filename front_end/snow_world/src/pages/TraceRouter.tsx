@@ -8,6 +8,10 @@ interface TraceResult {
   addr: string
   duration: string
   error?: string
+  country?: string
+  region?: string
+  city?: string
+  isp?: string
 }
 
 function TraceRouter() {
@@ -18,14 +22,7 @@ function TraceRouter() {
 
   const handleTrace = async () => {
     if (!ipAddress.trim()) {
-      setError('请输入IP地址')
-      return
-    }
-
-    // 简单的IP地址验证
-    const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/
-    if (!ipRegex.test(ipAddress.trim())) {
-      setError('请输入有效的IP地址格式（如：8.8.8.8）')
+      setError('请输入 IP 地址或域名（例如：8.8.8.8 或 www.example.com）')
       return
     }
 
@@ -84,42 +81,57 @@ function TraceRouter() {
         const data = await response.json()
 
         if (data.error_code !== 0) {
+          // error_code 不为 0，立即停止轮询
+          setError(data.error_msg || '请求失败')
+          setIsLoading(false)
+          return
+        }
+
+        // 根据 state 决定是否继续轮询
+        // state: 0 = 初始化, 1 = 完成, 2 = 失败
+        const state = data.state !== undefined ? data.state : 0
+
+        if (state === 0) {
+          // 状态为0（初始化），继续轮询
           if (attempts < maxAttempts) {
             attempts++
-            setTimeout(poll, 1000) // 每秒轮询一次
+            setTimeout(poll, 1000) // 继续轮询
           } else {
-            setError(data.error_msg || '请求超时，请稍后重试')
+            setError('请求超时，请稍后重试')
             setIsLoading(false)
           }
           return
         }
 
-        if (data.result) {
-          // 解析result字符串（可能是JSON格式）
-          try {
-            const parsed = JSON.parse(data.result)
-            if (Array.isArray(parsed)) {
-              formatAndSetResults(parsed)
-            } else {
-              // 如果不是数组，尝试其他格式
-              formatAndSetResults([parsed])
+        // state 为 1（完成）或 2（失败），停止轮询
+        setIsLoading(false)
+
+        if (state === 1) {
+          // 任务完成，解析并显示结果
+          if (data.result) {
+            try {
+              const parsed = JSON.parse(data.result)
+              if (Array.isArray(parsed)) {
+                formatAndSetResults(parsed)
+              } else {
+                // 如果不是数组，尝试其他格式
+                formatAndSetResults([parsed])
+              }
+            } catch {
+              // 如果不是JSON，直接显示文本
+              setResults([{
+                ttl: 0,
+                network: '',
+                addr: data.result,
+                duration: '',
+              }])
             }
-          } catch {
-            // 如果不是JSON，直接显示文本
-            setResults([{
-              ttl: 0,
-              network: '',
-              addr: data.result,
-              duration: '',
-            }])
+          } else {
+            setError('未收到有效结果')
           }
-          setIsLoading(false)
-        } else if (attempts < maxAttempts) {
-          attempts++
-          setTimeout(poll, 1000) // 继续轮询
-        } else {
-          setError('请求超时，请稍后重试')
-          setIsLoading(false)
+        } else if (state === 2) {
+          // 任务失败
+          setError('路由追踪失败，请稍后重试')
         }
       } catch (err) {
         console.error('Poll error:', err)
@@ -143,6 +155,10 @@ function TraceRouter() {
       addr: result.addr || result.Addr || '',
       duration: result.duration || result.Duration || '0ms',
       error: result.error || (result.Error ? result.Error.toString() : undefined),
+      country: result.country || result.Country || '',
+      region: result.region || result.Region || '',
+      city: result.city || result.City || '',
+      isp: result.isp || result.ISP || '',
     }))
     setResults(formatted)
   }
@@ -163,7 +179,7 @@ function TraceRouter() {
     <div className="trace-router-container">
       <div className="trace-router-header">
         <h1>路由追踪工具</h1>
-        <p className="trace-router-subtitle">输入IP地址，追踪数据包经过的路由节点</p>
+        <p className="trace-router-subtitle">输入IP地址或者域名，追踪数据包经过的路由节点</p>
       </div>
 
       <div className="trace-router-input-section">
@@ -174,7 +190,7 @@ function TraceRouter() {
             value={ipAddress}
             onChange={(e) => setIpAddress(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="请输入IP地址（如：8.8.8.8）"
+            placeholder="请输入IP地址或者域名（如：8.8.8.8）"
             disabled={isLoading}
           />
           <div className="button-group">
@@ -233,6 +249,12 @@ function TraceRouter() {
                   <div className="col-ttl">{result.ttl}</div>
                   <div className="col-addr">
                     {result.addr || result.error || '*'}
+                    {(result.country || result.region || result.city || result.isp) && (
+                      <div className="addr-extra">
+                        {[result.country, result.region, result.city].filter(Boolean).join(' / ')}
+                        {result.isp ? ` · ${result.isp}` : ''}
+                      </div>
+                    )}
                   </div>
                   <div className="col-duration">
                     {result.duration || '-'}
@@ -255,4 +277,3 @@ function TraceRouter() {
 }
 
 export default TraceRouter
-
