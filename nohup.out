@@ -1460,3 +1460,19 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN] 2026/01/29 - 09:02:06 | 200 |     148.804µs |             ::1 | GET      "/snow/get_material_list"
 [GIN] 2026/01/29 - 11:15:39 | 200 |    7.114904ms |             ::1 | GET      "/snow/get_material_list"
 [GIN] 2026/01/29 - 11:15:39 | 200 |     156.983µs |             ::1 | GET      "/snow/get_material_list"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /snow/cmdservice/cmd      --> github.com/glstr/futty_golang/httpserver/controller/handler.Cmd (4 handlers)
+[GIN-debug] POST   /snow/file/upload         --> github.com/glstr/futty_golang/httpserver/controller/handler.Upload (4 handlers)
+[GIN-debug] POST   /snow/file/download       --> github.com/glstr/futty_golang/httpserver/controller/handler.Download (4 handlers)
+panic: listen tcp :8764: bind: address already in use
+
+goroutine 11 [running]:
+github.com/glstr/futty_golang/tool.initPprof.func1()
+	/Users/sweetie/pengbaojiang/code/gosrc/gopath/src/github.com/glstr/futty_golang/tool/httpserver.go:41 +0x4b
+created by github.com/glstr/futty_golang/tool.initPprof in goroutine 1
+	/Users/sweetie/pengbaojiang/code/gosrc/gopath/src/github.com/glstr/futty_golang/tool/httpserver.go:38 +0x1a

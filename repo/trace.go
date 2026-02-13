@@ -3,8 +3,8 @@ package repo
 import (
 	"encoding/json"
 
+	"github.com/glstr/futty_golang/dal/db/localcache"
 	"github.com/glstr/futty_golang/repo/models"
-	"github.com/glstr/futty_golang/rpc/localcache"
 	"github.com/glstr/futty_golang/utils"
 )
 

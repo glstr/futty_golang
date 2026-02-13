@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/glstr/futty_golang/global"
+	"github.com/glstr/futty_golang/httpserver"
 	"github.com/glstr/futty_golang/logger"
 )
 
@@ -43,7 +44,7 @@ func initPprof() error {
 	return nil
 }
 
-func InitModule() error {
+func initModule() error {
 	for _, initFunc := range map2InitFunc {
 		err := initFunc()
 		if err != nil {
@@ -55,14 +56,13 @@ func InitModule() error {
 }
 
 func StartHttpServer() error {
-	//init module,including conf log pprof and so on.
-	err := InitModule()
+	err := initModule()
 	if err != nil {
 		panic(err)
 	}
 
 	logger.Notice("start http service")
-	err = StartHttpServer()
+	err = httpserver.StartHttpServer()
 	if err != nil {
 		panic(err)
 	}
